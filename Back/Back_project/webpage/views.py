@@ -6,3 +6,5 @@ import bcrypt
 
 from django.views import View
 from django.http import JsonResponse
+from models import USER_INFO
+
