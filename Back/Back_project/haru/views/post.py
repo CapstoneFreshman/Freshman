@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib import messages
-from . import Diary
+from haru.models import Diary
 # Create your views here.
 def record(request):
     if request.user.is_authenticated:
