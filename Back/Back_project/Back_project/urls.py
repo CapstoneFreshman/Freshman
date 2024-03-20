@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('members/', include('webpage.urls')),
     path('', views.index, name='index'),  # '/' 에 해당되는 path
+    path('haru/',include('haru.urls'))
 ]

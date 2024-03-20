@@ -51,4 +51,4 @@ def update(request):
             return redirect('webpage:index')
     else:
         form = CustomUserChangeForm(instance=request.user)
-    return render(request, 'webpage/update.html', {'form':form})
+    return render(request, 'webpage/update.html', {'form': form})
