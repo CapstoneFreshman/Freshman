@@ -15,6 +15,7 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth import logout, authenticate, login
 from django.shortcuts import redirect, render
 
+from haru.models import Haru_setting
 
 def index(request):
     return render(request, 'webpage/index.html')
@@ -36,6 +37,10 @@ def join_view(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)  # 사용자 인증
             login(request, user)  # 로그인
+
+            haru_setting = Haru_setting.create(user.pk)
+            haru_setting.save()
+
             return redirect('webpage:index')
     else:
         form = CustomUserCreationForm()
