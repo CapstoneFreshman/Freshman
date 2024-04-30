@@ -30,10 +30,17 @@ class Diary_detail(models.Model):
 class Haru_setting(models.Model):
     USER_ID = models.IntegerField(primary_key=True)
 
-    # haru age values
-    # TODO
-    # 1. define enum for HARU_OLD
-    # 2. implement validate_old
+    HARU_OLD_YOUTH = 0
+    HARU_OLD_TEENAGER = 1
+    HARU_OLD_ADULT = 2
+    HARU_OLD_SENIOR = 3
+
+    HARU_OLD_CHOICE = {
+        HARU_OLD_YOUTH : '유년층',
+        HARU_OLD_TEENAGER : '청소년층',
+        HARU_OLD_ADULT : '성인층',
+        HARU_OLD_SENIOR : '노년층'
+    }
 
     HARU_OLD = models.IntegerField()
 
@@ -43,14 +50,29 @@ class Haru_setting(models.Model):
     HARU_STYLE_NARRATE = 2 # 구연체
     HARU_STYLE_BROADCAST =3 # 중계체
     HARU_STYLE_KIND = 4 # 친절체
-    HARU_STYLE_ANIME = 5 # 씹덕체
+    HARU_STYLE_ANIME = 5 # 애니체
     HARU_STYLE_RECITE = 6 # 낭독체
+
+    HARU_STYLE_CHOICE = {
+        HARU_STYLE_MONOlOGUE : "독백체",
+        HARU_STYLE_DIALOGUE : "대화체",
+        HARU_STYLE_NARRATE : "구연체",
+        HARU_STYLE_BROADCAST : "중계체",
+        HARU_STYLE_KIND : "친절체",
+        HARU_STYLE_ANIME : "애니체",
+        HARU_STYLE_RECITE : "낭독체"
+    }
 
     HARU_STYLE = models.IntegerField()
 
     # haru gender values
     HARU_GENDER_MALE = 0
     HARU_GENDER_FEMALE = 1
+
+    HARU_GENDER_CHOICE = {
+        HARU_GENDER_MALE : "남성",
+        HARU_GENDER_FEMALE : "여성"
+    }
 
     HARU_GENDER = models.IntegerField()
 
@@ -68,11 +90,14 @@ class Haru_setting(models.Model):
         return setting
 
 
+    def validate_old(self, old):
+        return old in self.HARU_OLD_CHOICE.values()
+
+
     def validate_style(self, style):
-        return (self.HARU_STYLE_MONOLOGUE <= style) and (style <= self.HARU_STYLE_RECITE)
+        return style in self.HARU_STYLE_CHOICE
+
 
     def validate_gender(self, gender):
-        return (gender == 0) or (gender == 1)
+        return gender in self.HARU_GENDER_CHOICE
 
-    def validate_old(self, old):
-        raise Exception("not implemented yet")
