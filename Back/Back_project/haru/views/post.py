@@ -13,9 +13,10 @@ def record(request):
         return render('webpage:index')
     user_diary_set = Diary.objects.filter(id=user_id)
 
+
 def call_haru(request):
     if request.method == ' POST':
-        voice_file =  request.FILES['voice_file']
+        voice_file = request.FILES['voice_file']
         voice_path = temp_voice.temp_file(voice_file)
         full_text = api_connector.transcribe_audio(voice_path)
         short_text = api_connector.summarize_text(full_text)

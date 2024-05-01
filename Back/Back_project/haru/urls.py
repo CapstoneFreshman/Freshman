@@ -5,4 +5,5 @@ from . import views
 
 app_name = 'haru'
 urlpatterns =[
+    path('/',views.py)
 ]
