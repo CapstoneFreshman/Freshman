@@ -6,7 +6,7 @@ import bcrypt
 
 from django.views import View
 from django.http import JsonResponse
-from webpage.form import CustomUserCreationForm,CustomUserChangeForm
+from webpage.form import CustomUserCreationForm,CustomUserChangeForm, HaruSettingChangeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.views.decorators.http import require_http_methods
@@ -57,3 +57,21 @@ def update(request):
     else:
         form = CustomUserChangeForm(instance=request.user)
     return render(request, 'webpage/update.html', {'form': form})
+
+
+@login_required
+@require_http_methods(['GET', 'POST'])
+def haru_setting_view(request):
+    if request.method == 'GET':
+        return render(request, 'webpage/haru_setting.html', {'form' : HaruSettingChangeForm()})
+    elif request.method == 'POST':
+        form = HaruSettingChangeForm(request.POST)
+        if not form.is_valid():
+            return render(request, 'webpage/haru_setting.html', {'form' : HaruSettingChangeForm()})
+
+        user_setting = Haru_setting.objects.filter(USER_ID=request.user.id)
+
+        print(user_setting)
+
+        return redirect('index')
+
