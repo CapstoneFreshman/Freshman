@@ -9,6 +9,7 @@ Front :
 
 Back :
     우식 andytwo9878@gmail.com
+    사용 툴 : Python/Flask
 
 Subject :
     1번 - 감성 및 발화스타일을 동시에 고려한 음성합성 데이터를 활용한 음성 합성 응용 서비스 개발
