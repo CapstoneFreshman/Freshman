@@ -1,9 +1,9 @@
 from django.db import models
-
+from ..webpage.models import User
 
 # Create your models here.
 class DIARY(models.Model):
-    USER_ID = models.IntegerField()
+    USER_ID = models.ForeignKey(User, on_delete=models.CASCADE)
     DATE = models.DateTimeField(null=True,blank=True)
     EMO = models.CharField(max_length=30)
     ORI_FILE_DIR = models.TextField()
@@ -18,6 +18,7 @@ class DIARY(models.Model):
         return self.ORI_FILE_DIR
 
 class DIARY_DETAIl(models.Model):
+    ID = models.IntegerField(primary_key=True)
     SHORT_TEXT = models.TextField()
     FEEDBACK_TEXT = models.TextField()
     FEEDBACK_FILE_DIR = models.TextField()
@@ -26,10 +27,8 @@ class DIARY_DETAIl(models.Model):
         return self.SHORT_TEXT
     def GET_FEEDBACK_TEXT(self):
         return self.FEEDBACK_TEXT
-<<<<<<< HEAD
     def GET_FEEDBACK_FILE_DIR(self):
         return self.FEEDBACK_FILE_DIR
-=======
     def GET_FILE_DIR(self):
         return self.FILE_DIR
 
@@ -108,4 +107,3 @@ class Haru_setting(models.Model):
     def validate_gender(self, gender):
         return gender in self.HARU_GENDER_CHOICE
 
->>>>>>> b8a46799ec64da42d40bb9cf1725552d2ee2c854

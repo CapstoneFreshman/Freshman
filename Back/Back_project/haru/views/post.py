@@ -1,8 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib import messages
-from haru.models import Diary
+from django.contrib.auth.models import User
+from ..models import DIARY,DIARY_DETAIl
+from django.http import HttpResponse
+from datetime import datetime
 from . import temp_voice
 from . import api_connector
+from ..form import Get_diary,Get_detail
 
 # Create your views here.
 def record(request):
@@ -11,7 +15,18 @@ def record(request):
     else:
         messages.warning(request, "로그인이 필요한 서비스입니다.")
         return render('webpage:index')
-    user_diary_set = Diary.objects.filter(id=user_id)
+    new_diary = DIARY.objects.all()
+    if request.method == "POST":
+        date = datetime.now()
+        emo = request.POST['emo']
+        
+        if form.is_valid():
+            form.save()
+
+
+            return redirect('webpage:index')
+    else:
+        form = CustomUserCreationForm()
 
 
 def call_haru(request):
