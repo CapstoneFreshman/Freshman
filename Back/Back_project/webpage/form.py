@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth import get_user_model
-from .models import Haru_setting
+
 import requests
 
 from haru.models import Haru_setting
@@ -23,13 +23,7 @@ class CustomUserCreationForm(UserCreationForm):
         model = get_user_model()
         fields = UserCreationForm.Meta.fields + ('email', 'nick_name')
 
-<<<<<<< HEAD
-class HaruSetting(requests):
-    class Meta(requests):
-        model = Haru_setting()
-        fields = requests.Meta.fields + ('haru_old', 'haru_style', 'haru_gender')
-        
-=======
+
 
 
 
@@ -52,4 +46,3 @@ class HaruSettingChangeForm(forms.ModelForm):
             'HARU_STYLE' : forms.RadioSelect(choices=Haru_setting.HARU_STYLE_CHOICE),
             'HARU_GENDER' : forms.RadioSelect(choices=Haru_setting.HARU_GENDER_CHOICE)
         }
->>>>>>> b8a46799ec64da42d40bb9cf1725552d2ee2c854

@@ -1,5 +1,5 @@
 from django.db import models
-from ..webpage.models import User
+from webpage.models import User
 
 # Create your models here.
 class DIARY(models.Model):

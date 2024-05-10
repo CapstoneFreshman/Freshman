@@ -1,12 +1,8 @@
 from django import forms
-from haru.models import Diary,Diary_detail
+from .models import DIARY,DIARY_DETAIl
 
 class Get_diary(forms.ModelForm):
     class Meta:
-        model = Diary
-        fields = ['USER_ID', 'DATE', 'EMO', 'ORI_FILE_DIR']
+        model = DIARY
+        fields = ['EMO']
 
-class Get_detail(forms.ModelForm):
-    class Meta:
-        model = Diary_detail
-        fields = ['SHORT_TEXT','FEEDBACK_TEXT','FEEDBACK_FILE_DIR']

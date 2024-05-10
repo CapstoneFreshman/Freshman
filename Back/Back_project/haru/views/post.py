@@ -8,7 +8,7 @@ from django.http import HttpResponse,HttpResponseBadRequest
 from datetime import datetime
 from . import temp_voice
 from . import api_connector
-from ..form import Get_diary,Get_detail
+from ..form import Get_diary
 
 # Create your views here.
 def record(request):
@@ -19,8 +19,11 @@ def record(request):
         return render('webpage:index')
     diary = DIARY.objects.all()
     if request.method == "POST":
+        form = Get_diary(request.POST)
+        if form.is_valid():
+            form.save()
+            emo = form.cleaned_data.get('EMO')
         date = datetime.now()
-        emo = request.POST['emo']
         response = upload_wav_to_s3(request)
         if response.status_code == 200:
             ori_file_path = response.json()['url']
@@ -30,10 +33,11 @@ def record(request):
                 emo=emo,
                 ori_file_path=ori_file_path
             )
-            return HttpResponse("WAV file uploaded successfully.")
+            new_diary.save()
+            return HttpResponse("일기 작성 완료.")
         else:
             # 업로드 실패 시, 에러 처리
-            return HttpResponseBadRequest("Failed to upload WAV file.")
+            return HttpResponseBadRequest("음성 파일 업로드에 실패하였습니다.")
     else:
         return
 

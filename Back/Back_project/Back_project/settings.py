@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os.path
-from os import environ
+import environ
 from pathlib import Path
 import pymysql
 pymysql.install_as_MySQLdb()
@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'webpage.apps.WebpageConfig',
-    'haru.apps.HaruConfig'
+    'haru.apps.DiaryConfig'
 ]
 
 MIDDLEWARE = [
