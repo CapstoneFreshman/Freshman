@@ -34,6 +34,7 @@
 		83ED554A2BE9507F009D0579 /* HakgyoansimWoojuR.otf in Resources */ = {isa = PBXBuildFile; fileRef = 83ED55492BE9507F009D0579 /* HakgyoansimWoojuR.otf */; };
 		9B494DC1F83A43FFD98A9800 /* Pods_Haru_read.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC677B60EFA84F9B585A250 /* Pods_Haru_read.framework */; };
 		C87586528AE9C374143BA9A5 /* Pods_Haru_read_Haru_readUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD64BCB8FF3E5B351962CF9 /* Pods_Haru_read_Haru_readUITests.framework */; };
+		FB0C3F422BF023D90092A918 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0C3F412BF023D90092A918 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		B664A1B272B42CF90EAA5608 /* Pods-Haru_read-Haru_readUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Haru_read-Haru_readUITests.debug.xcconfig"; path = "Target Support Files/Pods-Haru_read-Haru_readUITests/Pods-Haru_read-Haru_readUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C04A2D73928D68529B300FAD /* Pods-Haru_read-Haru_readUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Haru_read-Haru_readUITests.release.xcconfig"; path = "Target Support Files/Pods-Haru_read-Haru_readUITests/Pods-Haru_read-Haru_readUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E164A60549AFA292D80977B4 /* Pods-Haru_read.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Haru_read.debug.xcconfig"; path = "Target Support Files/Pods-Haru_read/Pods-Haru_read.debug.xcconfig"; sourceTree = "<group>"; };
+		FB0C3F412BF023D90092A918 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 		83CC35B92BE7CD6D0038B0C3 /* Haru_read */ = {
 			isa = PBXGroup;
 			children = (
+				FB0C3F402BF023D90092A918 /* API */,
 				83ED55492BE9507F009D0579 /* HakgyoansimWoojuR.otf */,
 				83ED55472BE94D53009D0579 /* HakgyoansimWoojuR.ttf */,
 				83ED554B2BE9511C009D0579 /* Fonts */,
@@ -268,6 +271,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		FB0C3F402BF023D90092A918 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				FB0C3F412BF023D90092A918 /* User.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -279,6 +290,7 @@
 				83CC35B32BE7CD6D0038B0C3 /* Sources */,
 				83CC35B42BE7CD6D0038B0C3 /* Frameworks */,
 				83CC35B52BE7CD6D0038B0C3 /* Resources */,
+				7385CD184CF164277F421B7C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -316,6 +328,7 @@
 				83CC35D62BE7CD6F0038B0C3 /* Sources */,
 				83CC35D72BE7CD6F0038B0C3 /* Frameworks */,
 				83CC35D82BE7CD6F0038B0C3 /* Resources */,
+				0EA551C658450ECE6FF59851 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -400,6 +413,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0EA551C658450ECE6FF59851 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Haru_read-Haru_readUITests/Pods-Haru_read-Haru_readUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Haru_read-Haru_readUITests/Pods-Haru_read-Haru_readUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Haru_read-Haru_readUITests/Pods-Haru_read-Haru_readUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1CF404B55D7FEA5CC40E28E8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -466,6 +496,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7385CD184CF164277F421B7C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Haru_read/Pods-Haru_read-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Haru_read/Pods-Haru_read-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Haru_read/Pods-Haru_read-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -480,6 +527,7 @@
 				839DF22D2BE7F0BD0060CC3D /* DiaryCheckViewController.swift in Sources */,
 				83CC35C52BE7CD6D0038B0C3 /* Haru_read.xcdatamodeld in Sources */,
 				839DF2292BE7F0910060CC3D /* SubmitViewController.swift in Sources */,
+				FB0C3F422BF023D90092A918 /* User.swift in Sources */,
 				83CC35BB2BE7CD6D0038B0C3 /* AppDelegate.swift in Sources */,
 				839DF2272BE7F0640060CC3D /* RecordViewController.swift in Sources */,
 				83CC35EE2BE7D5D40038B0C3 /* LoginViewController.swift in Sources */,
@@ -581,7 +629,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -644,7 +692,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
