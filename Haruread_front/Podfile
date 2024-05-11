@@ -8,6 +8,7 @@ target 'Haru_read' do
   # Pods for Haru_read
 
   pod 'AudioKit'
+  pod 'Alamofire'
 
   target 'Haru_readTests' do
     inherit! :search_paths
