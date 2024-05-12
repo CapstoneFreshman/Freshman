@@ -10,31 +10,36 @@ import AudioKit
 
 class MypageViewController: UIViewController {
 
-    @IBOutlet weak var haruset_button: UIButton!
+
+    
     @IBOutlet weak var NameLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         Label_title()
         NameLabel.text = "새로운 텍스트"
         drawLine()
-        button()
-    }
-    @IBOutlet weak var gender: UILabel!
-    
-    func button(){
-        let screenWidth = UIScreen.main.bounds.width
-        self.haruset_button.layer.masksToBounds = true
-        self.haruset_button.layer.cornerRadius = 20
-        self.haruset_button.frame = CGRect(x: (screenWidth - 200) / 2, y: 650, width: 200, height: 50)
+      
     }
     let mystoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-    @IBAction func actionButton(_ sender: Any) {
-        let HaruSettingViewController = mystoryboard.instantiateViewController(withIdentifier: "HaruSettingViewController") as! HaruSettingViewController
-            HaruSettingViewController.modalTransitionStyle = .crossDissolve
-            HaruSettingViewController.modalPresentationStyle = .overFullScreen
-            self.present(HaruSettingViewController, animated: true, completion: nil)
+    @IBAction func page_button(_ sender: Any) {
+        let HaruSettingViewController = mystoryboard.instantiateViewController(withIdentifier: "HaruSettingViewController")
+        // 모달 전환 스타일 설정
+        HaruSettingViewController.modalTransitionStyle = .crossDissolve
+        HaruSettingViewController.modalPresentationStyle = .overFullScreen
+        
+        // 모달 방식으로 뷰 컨트롤러를 표시
+        self.present(HaruSettingViewController, animated: true, completion: nil)
     }
     
+    @IBOutlet weak var gender: UILabel!
+    
+    //func button(){
+     //   let screenWidth = UIScreen.main.bounds.width
+      //  self.haruset_button.layer.masksToBounds = true
+       // self.haruset_button.layer.cornerRadius = 20
+        //self.haruset_button.frame = CGRect(x: (screenWidth - 200) / 2, y: 650, width: 200, height: 50)
+   // }
+   
     
     func Label_title(){
         let label = UILabel()

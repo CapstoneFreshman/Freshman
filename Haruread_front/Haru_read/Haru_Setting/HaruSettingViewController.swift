@@ -7,22 +7,17 @@
 
 import UIKit
 
-
 class HaruSettingViewController: UIViewController {
-    weak var delegate: HaruSettingDelegate?
     private var selectedGender: String?
     private var selectedAgeGroup: String?
     private var selectedSpeakingStyle: String?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        button()
     }
     
-    
-    // 하루세팅부분코드 - 스토리보드가 아닌 코드로 전부 구현했음
+    // UI 설정 함수
     private func setupUI() {
         view.backgroundColor = UIColor(red: 255/255, green: 250/255, blue: 242/255, alpha: 1.0)  // 배경색 변경
         let scrollView = UIScrollView(frame: view.bounds)
@@ -43,11 +38,22 @@ class HaruSettingViewController: UIViewController {
             lastView = sectionView
         }
 
-        if let lastView = lastView {
-            scrollView.contentSize = CGSize(width: view.frame.width, height: lastView.frame.maxY + 20)
-        }
+        // "변경 완료" 버튼 추가
+        let completeButton = UIButton(type: .system)
+        completeButton.setTitle("변경 완료", for: .normal)
+        completeButton.setTitleColor(.white, for: .normal)
+        completeButton.backgroundColor = UIColor(red: 0.5059, green: 0.7176, blue: 0.5294, alpha: 1.0)
+        completeButton.layer.cornerRadius = 5
+        completeButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        completeButton.frame = CGRect(x: 20, y: (lastView?.frame.maxY ?? 0) + 100, width: view.frame.width - 40, height: 44)
+        completeButton.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
+        scrollView.addSubview(completeButton)
+
+        // 스크롤 뷰의 콘텐츠 크기를 버튼까지 포함하도록 조정
+        scrollView.contentSize = CGSize(width: view.frame.width, height: completeButton.frame.maxY + 20)
     }
 
+    // 섹션 생성 함수
     private func createSection(title: String, options: [String], yOffset: CGFloat) -> UIView {
         let sectionView = UIView(frame: CGRect(x: 0, y: yOffset, width: view.frame.width, height: 50 + CGFloat(options.count/2) * 35))
         sectionView.autoresizingMask = [.flexibleWidth]
@@ -102,39 +108,28 @@ class HaruSettingViewController: UIViewController {
         // 데이터 전달
         guard let section = sender.superview else { return }
 
-            // 선택된 값 저장
-            if section.tag == 0 { // 성별 섹션
-                selectedGender = sender.titleLabel?.text
-            } else if section.tag == 1 { // 연령대 섹션
-                selectedAgeGroup = sender.titleLabel?.text
-            } else if section.tag == 2 { // 발화 스타일 섹션
-                selectedSpeakingStyle = sender.titleLabel?.text
-            }
+        // 선택된 값 저장
+        if section.tag == 0 { // 성별 섹션
+            selectedGender = sender.titleLabel?.text
+        } else if section.tag == 1 { // 연령대 섹션
+            selectedAgeGroup = sender.titleLabel?.text
+        } else if section.tag == 2 { // 발화 스타일 섹션
+            selectedSpeakingStyle = sender.titleLabel?.text
+        }
     }
-    
-    let mystoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-    @IBOutlet weak var settingButton: UIButton!
-    func button(){
-        let screenWidth = UIScreen.main.bounds.width
-        self.settingButton.layer.masksToBounds = true
-        self.settingButton.layer.cornerRadius = 20
-        self.settingButton.frame = CGRect(x: (screenWidth - 200) / 2, y: 650, width: 200, height: 50)
-    }
-    
-    @IBAction func actionButton(_ sender: Any) {
-        let MypageViewController = mystoryboard.instantiateViewController(withIdentifier: "HomeViewController")
+
+    // "변경 완료" 버튼을 눌렀을 때의 동작
+    @objc private func completeButtonTapped() {
+        // Storyboard와 ViewController의 Identifier 확인 필요
+        let mystoryboard = UIStoryboard(name: "Main", bundle: nil)
+ 
+        let HaruSettingViewController = mystoryboard.instantiateViewController(withIdentifier: "MypageViewController")
         // 모달 전환 스타일 설정
-        MypageViewController.modalTransitionStyle = .crossDissolve
-        MypageViewController.modalPresentationStyle = .overFullScreen
+        HaruSettingViewController.modalTransitionStyle = .crossDissolve
+        HaruSettingViewController.modalPresentationStyle = .overFullScreen
         
         // 모달 방식으로 뷰 컨트롤러를 표시
-        self.present(MypageViewController, animated: true, completion: nil)
+        self.present(HaruSettingViewController, animated: true, completion: nil)
     }
-    
-    protocol HaruSettingDelegate: AnyObject {
-        func settingsDidUpdate(gender: String, ageGroup: String, speakingStyle: String)
-    }
-
-
 
 }
