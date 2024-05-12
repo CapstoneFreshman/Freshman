@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.9.1)
   - AudioKit (5.1.0):
     - AudioKit/C (= 5.1.0)
     - AudioKit/Core (= 5.1.0)
@@ -17,15 +18,18 @@ PODS:
   - AudioKit/STK (5.1.0)
 
 DEPENDENCIES:
+  - Alamofire
   - AudioKit
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - AudioKit
 
 SPEC CHECKSUMS:
+  Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
   AudioKit: 81246a4ccdd7ca3c6e0076f913070e90987b4369
 
-PODFILE CHECKSUM: a4308cbd7ca09bad9a259358c00d6e4b835d0ec9
+PODFILE CHECKSUM: 5dc7909955220c2509ba2841fe5e693f04e6cc3d
 
 COCOAPODS: 1.15.2
