@@ -4,7 +4,7 @@ from haru.models import Diary,Diary_detail
 from haru.form import Get_diary
 from haru.form import Get_detail
 
-def save_emo(request):
+def save_diary(request):
     if request.method == 'POST':
         form = Get_diary(request.POST)
         if form.is_valid():

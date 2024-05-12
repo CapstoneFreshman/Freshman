@@ -1,28 +1,34 @@
 from django.db import models
-
+from webpage.models import User
 
 # Create your models here.
-class Diary(models.Model):
-    USER_ID = models.IntegerField()
+class DIARY(models.Model):
+    USER_ID = models.ForeignKey(User, on_delete=models.CASCADE)
     DATE = models.DateTimeField(null=True,blank=True)
     EMO = models.CharField(max_length=30)
-    TEXT = models.TextField()
+    ORI_FILE_DIR = models.TextField()
 
     def GET_USER_ID(self):
         return self.USER_ID
     def GET_DATE(self):
         return self.DATE
-    def GET_TEXT(self):
-        return self.TEXT
     def GET_EMO(self):
         return self.EMO
+    def GET_ORI_FILE_DIR(self):
+        return self.ORI_FILE_DIR
 
-class Diary_detail(models.Model):
+class DIARY_DETAIl(models.Model):
+    ID = models.IntegerField(primary_key=True)
+    SHORT_TEXT = models.TextField()
     FEEDBACK_TEXT = models.TextField()
-    FILE_DIR = models.CharField(max_length=300)
+    FEEDBACK_FILE_DIR = models.TextField()
 
+    def GET_SHORT_TEXT(self):
+        return self.SHORT_TEXT
     def GET_FEEDBACK_TEXT(self):
         return self.FEEDBACK_TEXT
+    def GET_FEEDBACK_FILE_DIR(self):
+        return self.FEEDBACK_FILE_DIR
     def GET_FILE_DIR(self):
         return self.FILE_DIR
 
