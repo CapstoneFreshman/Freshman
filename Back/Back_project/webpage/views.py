@@ -69,9 +69,16 @@ def haru_setting_view(request):
         if not form.is_valid():
             return render(request, 'webpage/haru_setting.html', {'form' : HaruSettingChangeForm()})
 
-        user_setting = Haru_setting.objects.filter(USER_ID=request.user.id)
 
-        print(user_setting)
+        new_setting = form.save(commit=False)
+
+        if new_setting.validate_setting():
+            new_setting.pk = request.user.pk
+            new_setting.save()
+
+        else:
+            print(new_setting.HARU_OLD)
+
 
         return redirect('index')
 
