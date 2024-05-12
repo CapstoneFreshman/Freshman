@@ -1,0 +1,6 @@
+framework module Pods_Haru_read_Haru_readUITests {
+  umbrella header "Pods-Haru_read-Haru_readUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
