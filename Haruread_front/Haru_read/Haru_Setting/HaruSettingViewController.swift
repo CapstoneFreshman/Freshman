@@ -114,17 +114,21 @@ class HaruSettingViewController: UIViewController {
     
     let mystoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
     @IBOutlet weak var settingButton: UIButton!
-    @IBAction func actionButton(_ sender: Any) {
-        if let gender = selectedGender, let ageGroup = selectedAgeGroup, let speakingStyle = selectedSpeakingStyle {
-              delegate?.settingsDidUpdate(gender: gender, ageGroup: ageGroup, speakingStyle: speakingStyle)
-          }
-          dismiss(animated: true, completion: nil)
-    }
     func button(){
         let screenWidth = UIScreen.main.bounds.width
         self.settingButton.layer.masksToBounds = true
         self.settingButton.layer.cornerRadius = 20
         self.settingButton.frame = CGRect(x: (screenWidth - 200) / 2, y: 650, width: 200, height: 50)
+    }
+    
+    @IBAction func actionButton(_ sender: Any) {
+        let MypageViewController = mystoryboard.instantiateViewController(withIdentifier: "HomeViewController")
+        // 모달 전환 스타일 설정
+        MypageViewController.modalTransitionStyle = .crossDissolve
+        MypageViewController.modalPresentationStyle = .overFullScreen
+        
+        // 모달 방식으로 뷰 컨트롤러를 표시
+        self.present(MypageViewController, animated: true, completion: nil)
     }
     
     protocol HaruSettingDelegate: AnyObject {

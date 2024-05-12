@@ -504,9 +504,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="actionButton:" destination="jXq-Hp-30K" eventType="touchUpInside" id="gc7-WI-Khe"/>
-                                    <action selector="diaryButton:" destination="g8v-ce-D5W" eventType="touchUpInside" id="qNT-fg-QsJ"/>
-                                    <action selector="settingactionButton:" destination="jXq-Hp-30K" eventType="touchUpInside" id="L4M-s9-x9L"/>
+                                    <action selector="actionButton:" destination="jXq-Hp-30K" eventType="touchUpInside" id="47R-Rv-9G7"/>
                                 </connections>
                             </button>
                         </subviews>
