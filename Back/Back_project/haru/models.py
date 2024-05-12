@@ -71,6 +71,7 @@ class Haru_setting(models.Model):
 
     HARU_STYLE = models.IntegerField()
 
+
     # haru gender values
     HARU_GENDER_MALE = 0
     HARU_GENDER_FEMALE = 1
@@ -97,13 +98,17 @@ class Haru_setting(models.Model):
 
 
     def validate_old(self, old):
-        return old in self.HARU_OLD_CHOICE.values()
+        return old in self.HARU_OLD_CHOICE.keys()
 
 
     def validate_style(self, style):
-        return style in self.HARU_STYLE_CHOICE
+        return style in self.HARU_STYLE_CHOICE.keys()
 
 
     def validate_gender(self, gender):
-        return gender in self.HARU_GENDER_CHOICE
+        return gender in self.HARU_GENDER_CHOICE.keys()
+
+
+    def validate_setting(self):
+        return self.validate_style(self.HARU_STYLE) and self.validate_old(self.HARU_OLD) and self.validate_gender(self.HARU_GENDER)
 

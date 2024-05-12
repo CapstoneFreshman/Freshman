@@ -1,0 +1,6 @@
+framework module Pods_Haru_read {
+  umbrella header "Pods-Haru_read-umbrella.h"
+
+  export *
+  module * { export * }
+}

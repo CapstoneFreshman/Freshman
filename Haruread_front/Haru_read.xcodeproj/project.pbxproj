@@ -1,0 +1,855 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3748B5B5E0F32E4EE511777E /* Pods_Haru_readTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77474C51A97536520FDE5B71 /* Pods_Haru_readTests.framework */; };
+		839DF21F2BE7EFAD0060CC3D /* HaruSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839DF21E2BE7EFAD0060CC3D /* HaruSettingViewController.swift */; };
+		839DF2212BE7EFDB0060CC3D /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839DF2202BE7EFDB0060CC3D /* MypageViewController.swift */; };
+		839DF2252BE7F0430060CC3D /* EmotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839DF2242BE7F0430060CC3D /* EmotionViewController.swift */; };
+		839DF2272BE7F0640060CC3D /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839DF2262BE7F0640060CC3D /* RecordViewController.swift */; };
+		839DF2292BE7F0910060CC3D /* SubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839DF2282BE7F0910060CC3D /* SubmitViewController.swift */; };
+		839DF22B2BE7F0A50060CC3D /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839DF22A2BE7F0A50060CC3D /* CalendarViewController.swift */; };
+		839DF22D2BE7F0BD0060CC3D /* DiaryCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839DF22C2BE7F0BD0060CC3D /* DiaryCheckViewController.swift */; };
+		839DF2332BE7F46A0060CC3D /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839DF2322BE7F46A0060CC3D /* TabViewController.swift */; };
+		83CC35BB2BE7CD6D0038B0C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CC35BA2BE7CD6D0038B0C3 /* AppDelegate.swift */; };
+		83CC35BD2BE7CD6D0038B0C3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CC35BC2BE7CD6D0038B0C3 /* SceneDelegate.swift */; };
+		83CC35BF2BE7CD6D0038B0C3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CC35BE2BE7CD6D0038B0C3 /* ViewController.swift */; };
+		83CC35C22BE7CD6D0038B0C3 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 83CC35C12BE7CD6D0038B0C3 /* Base */; };
+		83CC35C52BE7CD6D0038B0C3 /* Haru_read.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 83CC35C32BE7CD6D0038B0C3 /* Haru_read.xcdatamodeld */; };
+		83CC35C72BE7CD6F0038B0C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83CC35C62BE7CD6F0038B0C3 /* Assets.xcassets */; };
+		83CC35CA2BE7CD6F0038B0C3 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 83CC35C92BE7CD6F0038B0C3 /* Base */; };
+		83CC35D52BE7CD6F0038B0C3 /* Haru_readTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CC35D42BE7CD6F0038B0C3 /* Haru_readTests.swift */; };
+		83CC35DF2BE7CD6F0038B0C3 /* Haru_readUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CC35DE2BE7CD6F0038B0C3 /* Haru_readUITests.swift */; };
+		83CC35E12BE7CD6F0038B0C3 /* Haru_readUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CC35E02BE7CD6F0038B0C3 /* Haru_readUITestsLaunchTests.swift */; };
+		83CC35EE2BE7D5D40038B0C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CC35ED2BE7D5D40038B0C3 /* LoginViewController.swift */; };
+		83CC35F02BE7D5F40038B0C3 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CC35EF2BE7D5F40038B0C3 /* SignupViewController.swift */; };
+		83CC35FE2BE7E7CF0038B0C3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CC35FD2BE7E7CE0038B0C3 /* HomeViewController.swift */; };
+		83ED55462BE94C5C009D0579 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ED55452BE94C5C009D0579 /* LaunchViewController.swift */; };
+		83ED55482BE94D53009D0579 /* HakgyoansimWoojuR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83ED55472BE94D53009D0579 /* HakgyoansimWoojuR.ttf */; };
+		83ED554A2BE9507F009D0579 /* HakgyoansimWoojuR.otf in Resources */ = {isa = PBXBuildFile; fileRef = 83ED55492BE9507F009D0579 /* HakgyoansimWoojuR.otf */; };
+		9B494DC1F83A43FFD98A9800 /* Pods_Haru_read.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC677B60EFA84F9B585A250 /* Pods_Haru_read.framework */; };
+		C87586528AE9C374143BA9A5 /* Pods_Haru_read_Haru_readUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD64BCB8FF3E5B351962CF9 /* Pods_Haru_read_Haru_readUITests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		83CC35D12BE7CD6F0038B0C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CC35AF2BE7CD6D0038B0C3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 83CC35B62BE7CD6D0038B0C3;
+			remoteInfo = Haru_read;
+		};
+		83CC35DB2BE7CD6F0038B0C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CC35AF2BE7CD6D0038B0C3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 83CC35B62BE7CD6D0038B0C3;
+			remoteInfo = Haru_read;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0BD64BCB8FF3E5B351962CF9 /* Pods_Haru_read_Haru_readUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Haru_read_Haru_readUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		184489BB53EDD7228A6D2773 /* Pods-Haru_read.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Haru_read.release.xcconfig"; path = "Target Support Files/Pods-Haru_read/Pods-Haru_read.release.xcconfig"; sourceTree = "<group>"; };
+		1A8CCEB1D9FB4FEC4B2B862B /* Pods-Haru_readTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Haru_readTests.release.xcconfig"; path = "Target Support Files/Pods-Haru_readTests/Pods-Haru_readTests.release.xcconfig"; sourceTree = "<group>"; };
+		1B3FC3F45E412F518A9B754E /* Pods-Haru_readTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Haru_readTests.debug.xcconfig"; path = "Target Support Files/Pods-Haru_readTests/Pods-Haru_readTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2EC677B60EFA84F9B585A250 /* Pods_Haru_read.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Haru_read.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		77474C51A97536520FDE5B71 /* Pods_Haru_readTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Haru_readTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		839DF21E2BE7EFAD0060CC3D /* HaruSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaruSettingViewController.swift; sourceTree = "<group>"; };
+		839DF2202BE7EFDB0060CC3D /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
+		839DF2242BE7F0430060CC3D /* EmotionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionViewController.swift; sourceTree = "<group>"; };
+		839DF2262BE7F0640060CC3D /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		839DF2282BE7F0910060CC3D /* SubmitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitViewController.swift; sourceTree = "<group>"; };
+		839DF22A2BE7F0A50060CC3D /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		839DF22C2BE7F0BD0060CC3D /* DiaryCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCheckViewController.swift; sourceTree = "<group>"; };
+		839DF2322BE7F46A0060CC3D /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
+		83CC35B72BE7CD6D0038B0C3 /* Haru_read.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Haru_read.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		83CC35BA2BE7CD6D0038B0C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		83CC35BC2BE7CD6D0038B0C3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		83CC35BE2BE7CD6D0038B0C3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		83CC35C12BE7CD6D0038B0C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		83CC35C42BE7CD6D0038B0C3 /* Haru_read.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Haru_read.xcdatamodel; sourceTree = "<group>"; };
+		83CC35C62BE7CD6F0038B0C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		83CC35C92BE7CD6F0038B0C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		83CC35CB2BE7CD6F0038B0C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83CC35D02BE7CD6F0038B0C3 /* Haru_readTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Haru_readTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		83CC35D42BE7CD6F0038B0C3 /* Haru_readTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haru_readTests.swift; sourceTree = "<group>"; };
+		83CC35DA2BE7CD6F0038B0C3 /* Haru_readUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Haru_readUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		83CC35DE2BE7CD6F0038B0C3 /* Haru_readUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haru_readUITests.swift; sourceTree = "<group>"; };
+		83CC35E02BE7CD6F0038B0C3 /* Haru_readUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haru_readUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		83CC35ED2BE7D5D40038B0C3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		83CC35EF2BE7D5F40038B0C3 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		83CC35FD2BE7E7CE0038B0C3 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		83ED55452BE94C5C009D0579 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		83ED55472BE94D53009D0579 /* HakgyoansimWoojuR.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HakgyoansimWoojuR.ttf; sourceTree = "<group>"; };
+		83ED55492BE9507F009D0579 /* HakgyoansimWoojuR.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HakgyoansimWoojuR.otf; sourceTree = "<group>"; };
+		B664A1B272B42CF90EAA5608 /* Pods-Haru_read-Haru_readUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Haru_read-Haru_readUITests.debug.xcconfig"; path = "Target Support Files/Pods-Haru_read-Haru_readUITests/Pods-Haru_read-Haru_readUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C04A2D73928D68529B300FAD /* Pods-Haru_read-Haru_readUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Haru_read-Haru_readUITests.release.xcconfig"; path = "Target Support Files/Pods-Haru_read-Haru_readUITests/Pods-Haru_read-Haru_readUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E164A60549AFA292D80977B4 /* Pods-Haru_read.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Haru_read.debug.xcconfig"; path = "Target Support Files/Pods-Haru_read/Pods-Haru_read.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		83CC35B42BE7CD6D0038B0C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B494DC1F83A43FFD98A9800 /* Pods_Haru_read.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83CC35CD2BE7CD6F0038B0C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3748B5B5E0F32E4EE511777E /* Pods_Haru_readTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83CC35D72BE7CD6F0038B0C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C87586528AE9C374143BA9A5 /* Pods_Haru_read_Haru_readUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		268CD564BF8AF74F98EF1FFF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2EC677B60EFA84F9B585A250 /* Pods_Haru_read.framework */,
+				0BD64BCB8FF3E5B351962CF9 /* Pods_Haru_read_Haru_readUITests.framework */,
+				77474C51A97536520FDE5B71 /* Pods_Haru_readTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		472DD1215B37572D4A55A43B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E164A60549AFA292D80977B4 /* Pods-Haru_read.debug.xcconfig */,
+				184489BB53EDD7228A6D2773 /* Pods-Haru_read.release.xcconfig */,
+				B664A1B272B42CF90EAA5608 /* Pods-Haru_read-Haru_readUITests.debug.xcconfig */,
+				C04A2D73928D68529B300FAD /* Pods-Haru_read-Haru_readUITests.release.xcconfig */,
+				1B3FC3F45E412F518A9B754E /* Pods-Haru_readTests.debug.xcconfig */,
+				1A8CCEB1D9FB4FEC4B2B862B /* Pods-Haru_readTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		839DF2342BE7F6920060CC3D /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				83CC35BA2BE7CD6D0038B0C3 /* AppDelegate.swift */,
+				83CC35BC2BE7CD6D0038B0C3 /* SceneDelegate.swift */,
+				83CC35C62BE7CD6F0038B0C3 /* Assets.xcassets */,
+				83CC35C32BE7CD6D0038B0C3 /* Haru_read.xcdatamodeld */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
+		83CC35AE2BE7CD6D0038B0C3 = {
+			isa = PBXGroup;
+			children = (
+				83CC35B92BE7CD6D0038B0C3 /* Haru_read */,
+				83CC35D32BE7CD6F0038B0C3 /* Haru_readTests */,
+				83CC35DD2BE7CD6F0038B0C3 /* Haru_readUITests */,
+				83CC35B82BE7CD6D0038B0C3 /* Products */,
+				472DD1215B37572D4A55A43B /* Pods */,
+				268CD564BF8AF74F98EF1FFF /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		83CC35B82BE7CD6D0038B0C3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				83CC35B72BE7CD6D0038B0C3 /* Haru_read.app */,
+				83CC35D02BE7CD6F0038B0C3 /* Haru_readTests.xctest */,
+				83CC35DA2BE7CD6F0038B0C3 /* Haru_readUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		83CC35B92BE7CD6D0038B0C3 /* Haru_read */ = {
+			isa = PBXGroup;
+			children = (
+				83ED55492BE9507F009D0579 /* HakgyoansimWoojuR.otf */,
+				83ED55472BE94D53009D0579 /* HakgyoansimWoojuR.ttf */,
+				83ED554B2BE9511C009D0579 /* Fonts */,
+				83CC35CB2BE7CD6F0038B0C3 /* Info.plist */,
+				839DF2342BE7F6920060CC3D /* SupportFiles */,
+				83CC36012BE7EAA50038B0C3 /* Home */,
+				83CC35F82BE7E0E10038B0C3 /* Haru_Setting */,
+				83CC35F72BE7E0C60038B0C3 /* Calendar  */,
+				83CC35F62BE7E0BD0038B0C3 /* Diary */,
+				83CC35F52BE7E09C0038B0C3 /* Login */,
+				83CC35BE2BE7CD6D0038B0C3 /* ViewController.swift */,
+				83CC35C02BE7CD6D0038B0C3 /* Main.storyboard */,
+				83CC35C82BE7CD6F0038B0C3 /* LaunchScreen.storyboard */,
+				83ED55452BE94C5C009D0579 /* LaunchViewController.swift */,
+			);
+			path = Haru_read;
+			sourceTree = "<group>";
+		};
+		83CC35D32BE7CD6F0038B0C3 /* Haru_readTests */ = {
+			isa = PBXGroup;
+			children = (
+				83CC35D42BE7CD6F0038B0C3 /* Haru_readTests.swift */,
+			);
+			path = Haru_readTests;
+			sourceTree = "<group>";
+		};
+		83CC35DD2BE7CD6F0038B0C3 /* Haru_readUITests */ = {
+			isa = PBXGroup;
+			children = (
+				83CC35DE2BE7CD6F0038B0C3 /* Haru_readUITests.swift */,
+				83CC35E02BE7CD6F0038B0C3 /* Haru_readUITestsLaunchTests.swift */,
+			);
+			path = Haru_readUITests;
+			sourceTree = "<group>";
+		};
+		83CC35F52BE7E09C0038B0C3 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				83CC35EF2BE7D5F40038B0C3 /* SignupViewController.swift */,
+				83CC35ED2BE7D5D40038B0C3 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		83CC35F62BE7E0BD0038B0C3 /* Diary */ = {
+			isa = PBXGroup;
+			children = (
+				839DF2242BE7F0430060CC3D /* EmotionViewController.swift */,
+				839DF2262BE7F0640060CC3D /* RecordViewController.swift */,
+				839DF2282BE7F0910060CC3D /* SubmitViewController.swift */,
+			);
+			path = Diary;
+			sourceTree = "<group>";
+		};
+		83CC35F72BE7E0C60038B0C3 /* Calendar  */ = {
+			isa = PBXGroup;
+			children = (
+				839DF22A2BE7F0A50060CC3D /* CalendarViewController.swift */,
+				839DF22C2BE7F0BD0060CC3D /* DiaryCheckViewController.swift */,
+			);
+			path = "Calendar ";
+			sourceTree = "<group>";
+		};
+		83CC35F82BE7E0E10038B0C3 /* Haru_Setting */ = {
+			isa = PBXGroup;
+			children = (
+				839DF21E2BE7EFAD0060CC3D /* HaruSettingViewController.swift */,
+				839DF2202BE7EFDB0060CC3D /* MypageViewController.swift */,
+			);
+			path = Haru_Setting;
+			sourceTree = "<group>";
+		};
+		83CC36012BE7EAA50038B0C3 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				83CC35FD2BE7E7CE0038B0C3 /* HomeViewController.swift */,
+				839DF2322BE7F46A0060CC3D /* TabViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		83ED554B2BE9511C009D0579 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		83CC35B62BE7CD6D0038B0C3 /* Haru_read */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83CC35E42BE7CD6F0038B0C3 /* Build configuration list for PBXNativeTarget "Haru_read" */;
+			buildPhases = (
+				1CF404B55D7FEA5CC40E28E8 /* [CP] Check Pods Manifest.lock */,
+				83CC35B32BE7CD6D0038B0C3 /* Sources */,
+				83CC35B42BE7CD6D0038B0C3 /* Frameworks */,
+				83CC35B52BE7CD6D0038B0C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Haru_read;
+			productName = Haru_read;
+			productReference = 83CC35B72BE7CD6D0038B0C3 /* Haru_read.app */;
+			productType = "com.apple.product-type.application";
+		};
+		83CC35CF2BE7CD6F0038B0C3 /* Haru_readTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83CC35E72BE7CD6F0038B0C3 /* Build configuration list for PBXNativeTarget "Haru_readTests" */;
+			buildPhases = (
+				226AC0D03F5CCDC204B79409 /* [CP] Check Pods Manifest.lock */,
+				83CC35CC2BE7CD6F0038B0C3 /* Sources */,
+				83CC35CD2BE7CD6F0038B0C3 /* Frameworks */,
+				83CC35CE2BE7CD6F0038B0C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				83CC35D22BE7CD6F0038B0C3 /* PBXTargetDependency */,
+			);
+			name = Haru_readTests;
+			productName = Haru_readTests;
+			productReference = 83CC35D02BE7CD6F0038B0C3 /* Haru_readTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		83CC35D92BE7CD6F0038B0C3 /* Haru_readUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83CC35EA2BE7CD6F0038B0C3 /* Build configuration list for PBXNativeTarget "Haru_readUITests" */;
+			buildPhases = (
+				27AD501BC517AE3D93C09AB8 /* [CP] Check Pods Manifest.lock */,
+				83CC35D62BE7CD6F0038B0C3 /* Sources */,
+				83CC35D72BE7CD6F0038B0C3 /* Frameworks */,
+				83CC35D82BE7CD6F0038B0C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				83CC35DC2BE7CD6F0038B0C3 /* PBXTargetDependency */,
+			);
+			name = Haru_readUITests;
+			productName = Haru_readUITests;
+			productReference = 83CC35DA2BE7CD6F0038B0C3 /* Haru_readUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		83CC35AF2BE7CD6D0038B0C3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = {
+					83CC35B62BE7CD6D0038B0C3 = {
+						CreatedOnToolsVersion = 15.3;
+					};
+					83CC35CF2BE7CD6F0038B0C3 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = 83CC35B62BE7CD6D0038B0C3;
+					};
+					83CC35D92BE7CD6F0038B0C3 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = 83CC35B62BE7CD6D0038B0C3;
+					};
+				};
+			};
+			buildConfigurationList = 83CC35B22BE7CD6D0038B0C3 /* Build configuration list for PBXProject "Haru_read" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 83CC35AE2BE7CD6D0038B0C3;
+			productRefGroup = 83CC35B82BE7CD6D0038B0C3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				83CC35B62BE7CD6D0038B0C3 /* Haru_read */,
+				83CC35CF2BE7CD6F0038B0C3 /* Haru_readTests */,
+				83CC35D92BE7CD6F0038B0C3 /* Haru_readUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		83CC35B52BE7CD6D0038B0C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83CC35C72BE7CD6F0038B0C3 /* Assets.xcassets in Resources */,
+				83CC35CA2BE7CD6F0038B0C3 /* Base in Resources */,
+				83ED55482BE94D53009D0579 /* HakgyoansimWoojuR.ttf in Resources */,
+				83CC35C22BE7CD6D0038B0C3 /* Base in Resources */,
+				83ED554A2BE9507F009D0579 /* HakgyoansimWoojuR.otf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83CC35CE2BE7CD6F0038B0C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83CC35D82BE7CD6F0038B0C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1CF404B55D7FEA5CC40E28E8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Haru_read-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		226AC0D03F5CCDC204B79409 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Haru_readTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		27AD501BC517AE3D93C09AB8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Haru_read-Haru_readUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		83CC35B32BE7CD6D0038B0C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				839DF2252BE7F0430060CC3D /* EmotionViewController.swift in Sources */,
+				83CC35F02BE7D5F40038B0C3 /* SignupViewController.swift in Sources */,
+				83CC35BF2BE7CD6D0038B0C3 /* ViewController.swift in Sources */,
+				839DF2332BE7F46A0060CC3D /* TabViewController.swift in Sources */,
+				839DF22D2BE7F0BD0060CC3D /* DiaryCheckViewController.swift in Sources */,
+				83CC35C52BE7CD6D0038B0C3 /* Haru_read.xcdatamodeld in Sources */,
+				839DF2292BE7F0910060CC3D /* SubmitViewController.swift in Sources */,
+				83CC35BB2BE7CD6D0038B0C3 /* AppDelegate.swift in Sources */,
+				839DF2272BE7F0640060CC3D /* RecordViewController.swift in Sources */,
+				83CC35EE2BE7D5D40038B0C3 /* LoginViewController.swift in Sources */,
+				839DF22B2BE7F0A50060CC3D /* CalendarViewController.swift in Sources */,
+				839DF2212BE7EFDB0060CC3D /* MypageViewController.swift in Sources */,
+				83CC35FE2BE7E7CF0038B0C3 /* HomeViewController.swift in Sources */,
+				83CC35BD2BE7CD6D0038B0C3 /* SceneDelegate.swift in Sources */,
+				839DF21F2BE7EFAD0060CC3D /* HaruSettingViewController.swift in Sources */,
+				83ED55462BE94C5C009D0579 /* LaunchViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83CC35CC2BE7CD6F0038B0C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83CC35D52BE7CD6F0038B0C3 /* Haru_readTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83CC35D62BE7CD6F0038B0C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83CC35E12BE7CD6F0038B0C3 /* Haru_readUITestsLaunchTests.swift in Sources */,
+				83CC35DF2BE7CD6F0038B0C3 /* Haru_readUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		83CC35D22BE7CD6F0038B0C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 83CC35B62BE7CD6D0038B0C3 /* Haru_read */;
+			targetProxy = 83CC35D12BE7CD6F0038B0C3 /* PBXContainerItemProxy */;
+		};
+		83CC35DC2BE7CD6F0038B0C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 83CC35B62BE7CD6D0038B0C3 /* Haru_read */;
+			targetProxy = 83CC35DB2BE7CD6F0038B0C3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		83CC35C02BE7CD6D0038B0C3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83CC35C12BE7CD6D0038B0C3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		83CC35C82BE7CD6F0038B0C3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83CC35C92BE7CD6F0038B0C3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		83CC35E22BE7CD6F0038B0C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		83CC35E32BE7CD6F0038B0C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		83CC35E52BE7CD6F0038B0C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E164A60549AFA292D80977B4 /* Pods-Haru_read.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Haru_read/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jeonsyeon.Haru-read";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		83CC35E62BE7CD6F0038B0C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 184489BB53EDD7228A6D2773 /* Pods-Haru_read.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Haru_read/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jeonsyeon.Haru-read";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		83CC35E82BE7CD6F0038B0C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B3FC3F45E412F518A9B754E /* Pods-Haru_readTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jeonsyeon.Haru-readTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Haru_read.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Haru_read";
+			};
+			name = Debug;
+		};
+		83CC35E92BE7CD6F0038B0C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1A8CCEB1D9FB4FEC4B2B862B /* Pods-Haru_readTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jeonsyeon.Haru-readTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Haru_read.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Haru_read";
+			};
+			name = Release;
+		};
+		83CC35EB2BE7CD6F0038B0C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B664A1B272B42CF90EAA5608 /* Pods-Haru_read-Haru_readUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jeonsyeon.Haru-readUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Haru_read;
+			};
+			name = Debug;
+		};
+		83CC35EC2BE7CD6F0038B0C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C04A2D73928D68529B300FAD /* Pods-Haru_read-Haru_readUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jeonsyeon.Haru-readUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Haru_read;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		83CC35B22BE7CD6D0038B0C3 /* Build configuration list for PBXProject "Haru_read" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83CC35E22BE7CD6F0038B0C3 /* Debug */,
+				83CC35E32BE7CD6F0038B0C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83CC35E42BE7CD6F0038B0C3 /* Build configuration list for PBXNativeTarget "Haru_read" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83CC35E52BE7CD6F0038B0C3 /* Debug */,
+				83CC35E62BE7CD6F0038B0C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83CC35E72BE7CD6F0038B0C3 /* Build configuration list for PBXNativeTarget "Haru_readTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83CC35E82BE7CD6F0038B0C3 /* Debug */,
+				83CC35E92BE7CD6F0038B0C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83CC35EA2BE7CD6F0038B0C3 /* Build configuration list for PBXNativeTarget "Haru_readUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83CC35EB2BE7CD6F0038B0C3 /* Debug */,
+				83CC35EC2BE7CD6F0038B0C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		83CC35C32BE7CD6D0038B0C3 /* Haru_read.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				83CC35C42BE7CD6D0038B0C3 /* Haru_read.xcdatamodel */,
+			);
+			currentVersion = 83CC35C42BE7CD6D0038B0C3 /* Haru_read.xcdatamodel */;
+			path = Haru_read.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 83CC35AF2BE7CD6D0038B0C3 /* Project object */;
+}
