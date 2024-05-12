@@ -5,11 +5,13 @@ import bcrypt
 # Create your views here.
 
 from django.views import View
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse, HttpRequest
+from django.middleware import csrf
 from webpage.form import CustomUserCreationForm,CustomUserChangeForm, HaruSettingChangeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.views.decorators.http import require_http_methods
+
 
 
 from django.contrib.auth import logout, authenticate, login
@@ -25,13 +27,13 @@ def logout_view(request):
     logout(request)
     return redirect('index')
 
+
+
 @require_http_methods(['GET','POST'])
-def join_view(request):
-    if request.user.is_authenticated:
-        return redirect('webpage:index')
+def join_view(request: HttpRequest):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
+        if form.is_valid() and request.user.is_authenticated == False:
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
@@ -43,8 +45,7 @@ def join_view(request):
 
             return redirect('webpage:index')
     else:
-        form = CustomUserCreationForm()
-    return render(request, 'webpage/join.html', {'form': form})
+        return JsonResponse({'csrf_token':csrf.get_token(request)})
 
 @login_required
 @require_http_methods(['GET', 'POST'])
@@ -62,23 +63,23 @@ def update(request):
 @login_required
 @require_http_methods(['GET', 'POST'])
 def haru_setting_view(request):
-    if request.method == 'GET':
-        return render(request, 'webpage/haru_setting.html', {'form' : HaruSettingChangeForm()})
-    elif request.method == 'POST':
+    if request.method == 'POST' and request.user.authenticated:
         form = HaruSettingChangeForm(request.POST)
-        if not form.is_valid():
-            return render(request, 'webpage/haru_setting.html', {'form' : HaruSettingChangeForm()})
+        res = {"success":False}
+        if form.is_valid():
+            new_setting = form.save(commit=False)
+
+            if new_setting.validate_setting():
+                new_setting.pk = request.user.pk
+                new_setting.save()
+                res['success'] = True
 
 
-        new_setting = form.save(commit=False)
 
-        if new_setting.validate_setting():
-            new_setting.pk = request.user.pk
-            new_setting.save()
-
-        else:
-            print(new_setting.HARU_OLD)
+        return JsonResponse(res)
+    return JsonResponse({'csrf_token':csrf.get_token(request)})
+    
 
 
-        return redirect('index')
-
+def auth_view(request: HttpRequest):
+    return JsonResponse({"is_authenticated": request.user.is_authenticated})

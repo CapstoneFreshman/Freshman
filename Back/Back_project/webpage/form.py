@@ -22,8 +22,6 @@ class CustomUserCreationForm(UserCreationForm):
         fields = UserCreationForm.Meta.fields + ('email', 'nick_name')
 
 
-
-
 class HaruSettingChangeForm(forms.ModelForm):
 
     class Meta:
