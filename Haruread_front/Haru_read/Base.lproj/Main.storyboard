@@ -350,7 +350,7 @@
         <!--Item-->
         <scene sceneID="bcT-hs-kb5">
             <objects>
-                <viewController storyboardIdentifier="MypageViewController" id="zBR-t0-H5k" customClass="MypageViewController" customModule="Haru_read" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MypageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zBR-t0-H5k" customClass="MypageViewController" customModule="Haru_read" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dwJ-g4-zSs">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -446,8 +446,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="actionButton:" destination="zBR-t0-H5k" eventType="touchUpInside" id="6ym-9Y-RMW"/>
                                     <action selector="diaryButton:" destination="g8v-ce-D5W" eventType="touchUpInside" id="HHY-wI-2qZ"/>
-                                    <segue destination="jXq-Hp-30K" kind="show" id="Kaa-a4-r29"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="하루 설정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cxs-ux-suW">
@@ -462,6 +462,7 @@
                         <color key="backgroundColor" red="0.99607843159999998" green="0.98431372640000003" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="45W-bb-JGp"/>
+                    <navigationItem key="navigationItem" id="dQW-eb-ker"/>
                     <connections>
                         <outlet property="NameLabel" destination="qLd-md-qa7" id="kOu-nu-pNw"/>
                         <outlet property="gender" destination="zOa-0f-qOc" id="7fa-8C-J9i"/>
@@ -477,11 +478,18 @@
             <objects>
                 <viewController storyboardIdentifier="HaruSettingViewController" id="jXq-Hp-30K" customClass="HaruSettingViewController" customModule="Haru_read" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0wk-g9-lPJ">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XP7-jO-rdf">
-                                <rect key="frame" x="113" y="697" width="166" height="35"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="하루 설정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0G5-GZ-hEo">
+                                <rect key="frame" x="150" y="79" width="93" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="19L-na-Z9m">
+                                <rect key="frame" x="113" y="723" width="166" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="변경 완료">
@@ -496,7 +504,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="diaryButton:" destination="g8v-ce-D5W" eventType="touchUpInside" id="AVj-bd-CYS"/>
+                                    <action selector="actionButton:" destination="jXq-Hp-30K" eventType="touchUpInside" id="47R-Rv-9G7"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -504,10 +512,13 @@
                         <color key="backgroundColor" red="1" green="0.98039215690000003" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="bMF-10-oA8"/>
+                    <connections>
+                        <outlet property="settingButton" destination="19L-na-Z9m" id="TvR-Mt-7Zb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bae-UW-rOh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3488" y="1627"/>
+            <point key="canvasLocation" x="3487.7862595419847" y="1626.7605633802818"/>
         </scene>
         <!--Tab View Controller-->
         <scene sceneID="vOZ-vW-P9F">

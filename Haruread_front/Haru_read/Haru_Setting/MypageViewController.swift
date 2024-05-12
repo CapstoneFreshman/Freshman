@@ -27,6 +27,14 @@ class MypageViewController: UIViewController {
         self.haruset_button.layer.cornerRadius = 20
         self.haruset_button.frame = CGRect(x: (screenWidth - 200) / 2, y: 650, width: 200, height: 50)
     }
+    let mystoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    @IBAction func actionButton(_ sender: Any) {
+        let HaruSettingViewController = mystoryboard.instantiateViewController(withIdentifier: "HaruSettingViewController") as! HaruSettingViewController
+            HaruSettingViewController.modalTransitionStyle = .crossDissolve
+            HaruSettingViewController.modalPresentationStyle = .overFullScreen
+            self.present(HaruSettingViewController, animated: true, completion: nil)
+    }
+    
     
     func Label_title(){
         let label = UILabel()
@@ -66,5 +74,6 @@ class MypageViewController: UIViewController {
         view.layer.addSublayer(shapeLayer2)
     }
     
+
  
 }
