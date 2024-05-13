@@ -70,15 +70,29 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func LoginButton(_ sender: Any) {
-        if let tabBarController = mystoryboard.instantiateViewController(withIdentifier: "TabViewController") as? UITabBarController {
-            // 모달 전환 스타일을 설정합니다.
-            tabBarController.modalPresentationStyle = .fullScreen
+        
+        let username = idTextField.text!
+        let passwd = passwordTextField.text!
+        
+        User.instance.login(username: username, password: passwd)
+        
+        if User.instance.is_authenticated
+        {
+            if let tabBarController = mystoryboard.instantiateViewController(withIdentifier: "TabViewController") as? UITabBarController {
+                // 모달 전환 스타일을 설정합니다.
+                tabBarController.modalPresentationStyle = .fullScreen
 
-            // 현재 ViewController에서 TabBarController로 전환합니다.
-            self.present(tabBarController, animated: true, completion: nil)
-        } else {
-            // 타입 캐스팅에 실패했을 경우, 에러 메시지를 출력합니다.
-            print("Could not instantiate TabViewController as UITabBarController.")
+                // 현재 ViewController에서 TabBarController로 전환합니다.
+                self.present(tabBarController, animated: true, completion: nil)
+            } else {
+                // 타입 캐스팅에 실패했을 경우, 에러 메시지를 출력합니다.
+                print("Could not instantiate TabViewController as UITabBarController.")
+            }
+        }
+        else
+        {
+            //TODO: show warning or alert when login failed
+            print("login failed")
         }
     }
     

@@ -10,6 +10,8 @@ import Alamofire
 
 class User
 {
+    
+    //define response param struct
     struct CSRFTokenResponse: Decodable{
         let csrf_token: String
     }
@@ -18,6 +20,12 @@ class User
         let is_authenticated: Bool
     }
     
+    struct HaruSettingResponse: Decodable{
+        let success: Bool
+    }
+    
+    
+    //define request param struct
     struct LoginRequestParam: Encodable{
         let username: String
         let password: String
@@ -32,6 +40,35 @@ class User
         let nick_name: String
         let csrfmiddlewaretoken: String
     }
+    
+    struct HaruSettingRequestParam: Encodable{
+        let HARU_OLD: Int
+        let HARU_STYLE: Int
+        let HARU_GENDER: Int
+        let csrfmiddlewaretoken: String
+    }
+    
+    
+    struct HaruSettingDict{
+        static let Old: [String: Int] = ["유년층": 0, "청소년층": 1, "성인층": 2, "노년층": 3]
+        static let Style: [String: Int] = ["구연체": 2, "낭독체": 6, "대화체": 1, "독백체": 0, "애니체": 5, "중계체": 3, "친절체": 4]
+        static let Gender: [String: Int] =  ["남자": 0, "여자": 1]
+        
+        static func validate(old: String?, style: String?, gender: String?) -> Bool {
+            guard let old = old, let style = style, let gender = gender else {
+                return false // If any parameter is nil, return false
+            }
+            
+            let oldValid = Old.keys.contains(old)
+            let styleValid = Style.keys.contains(style)
+            let genderValid = Gender.keys.contains(gender)
+            
+            return oldValid && styleValid && genderValid
+        }
+    }
+    
+    private var HaruSetting: [String: String] = ["Old": "", "Style": "", "Gender": ""]
+    
     
     static let instance = User()
     
@@ -102,5 +139,40 @@ class User
             }
         }
         
+    }
+    
+    public func change_haru_setting(old:String, style:String, gender:String)
+    {
+        
+        if HaruSettingDict.validate(old:old, style:style, gender:gender)
+        {
+            
+            self.get_csrf_token(endpoint: "members/haru_setting/"){token in
+                let param: HaruSettingRequestParam = HaruSettingRequestParam(
+                    HARU_OLD: HaruSettingDict.Old[old]!,
+                    HARU_STYLE: HaruSettingDict.Style[style]!,
+                    HARU_GENDER: HaruSettingDict.Gender[gender]!,
+                    csrfmiddlewaretoken: token
+                )
+                
+                debugPrint(param)
+                
+                AF.request(User.host+"members/haru_setting/", method: .post, parameters: param, encoder: URLEncodedFormParameterEncoder(destination: .methodDependent)).responseDecodable(of: HaruSettingResponse.self){res in
+                    guard case .success(let haru_response) = res.result else {
+                        return
+                    }
+                    if haru_response.success
+                    {
+                        self.HaruSetting["Old"] = old
+                        self.HaruSetting["Style"] = style
+                        self.HaruSetting["Gender"] = gender
+                        
+                        print("Haru setting changed")
+                        
+                        debugPrint(self.HaruSetting)
+                    }
+                }
+            }
+        }
     }
 }
