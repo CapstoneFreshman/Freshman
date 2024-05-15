@@ -70,6 +70,12 @@ class LoginViewController: UIViewController {
             homeViewController.modalPresentationStyle = .fullScreen
             self.present(homeViewController, animated: true, completion: nil)
         }
+            
+        onfailure:
+        {
+            //do something on failure
+            print("LoginViewController(Login Failed): Not implemented")
+        }
     }
     @IBAction func SignupButton(_ sender: Any) {
         let SignupViewController = mystoryboard.instantiateViewController(withIdentifier: "SignupViewController")

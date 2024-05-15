@@ -126,16 +126,23 @@ class HaruSettingViewController: UIViewController {
     // "변경 완료" 버튼을 눌렀을 때의 동작
     @objc private func completeButtonTapped() {
         
-        // Storyboard와 ViewController의 Identifier 확인 필요
-        let mystoryboard = UIStoryboard(name: "Main", bundle: nil)
- 
-        let HaruSettingViewController = mystoryboard.instantiateViewController(withIdentifier: "MypageViewController")
-        // 모달 전환 스타일 설정
-        HaruSettingViewController.modalTransitionStyle = .crossDissolve
-        HaruSettingViewController.modalPresentationStyle = .overFullScreen
+        User.instance.change_haru_setting(old: selectedAgeGroup!, style: selectedSpeakingStyle!, gender: selectedGender!){
+            
         
-        // 모달 방식으로 뷰 컨트롤러를 표시
-        self.present(HaruSettingViewController, animated: true, completion: nil)
+            // Storyboard와 ViewController의 Identifier 확인 필요
+            let mystoryboard = UIStoryboard(name: "Main", bundle: nil)
+     
+            let HaruSettingViewController = mystoryboard.instantiateViewController(withIdentifier: "MypageViewController")
+            // 모달 전환 스타일 설정
+            HaruSettingViewController.modalTransitionStyle = .crossDissolve
+            HaruSettingViewController.modalPresentationStyle = .overFullScreen
+            
+            // 모달 방식으로 뷰 컨트롤러를 표시
+            self.present(HaruSettingViewController, animated: true, completion: nil)
+        } onfailure:
+        {
+            print("HaruSettingViewController(change haru setting failed): Not implemented")
+        }
     }
 
 }
