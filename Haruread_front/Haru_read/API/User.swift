@@ -99,7 +99,7 @@ class User
         return
     }
     
-    public func signup(username: String, password1: String, password2: String, email: String, nick_name: String, onsuccess: @escaping () -> ())
+    public func signup(username: String, password1: String, password2: String, email: String, nick_name: String, onsuccess: @escaping () -> (), onfailure: @escaping () -> ())
     {
         
         
@@ -108,6 +108,7 @@ class User
             AF.request(User.host+"members/join/", method: .post, parameters: param).responseDecodable(of: SignupResponse.self){res in
                 guard case .success(let signup_response) = res.result else {
                     User.instance.is_authenticated = false
+                    onfailure()
                     return
                 }
                 User.instance.is_authenticated = signup_response.success
@@ -116,12 +117,16 @@ class User
                 {
                     onsuccess()
                 }
+                else
+                {
+                    onfailure()
+                }
                 
             }
         }
     }
     
-    public func login(username: String, password: String, onsuccess: @escaping () -> ())
+    public func login(username: String, password: String, onsuccess: @escaping () -> (), onfailure: @escaping () -> ())
     {
         self.get_csrf_token(endpoint: "members/join/"){ token in
             let param = LoginRequestParam(username: username, password: password, csrfmiddlewaretoken: token)
@@ -131,6 +136,7 @@ class User
             AF.request(User.host+"members/login/", method: .post, parameters: param, encoder: URLEncodedFormParameterEncoder(destination: .methodDependent)).responseString{res in
                 
                 guard case .success(_) = res.result else{
+                    onfailure()
                     return
                 }
                 
@@ -143,7 +149,7 @@ class User
         
     
     
-    public func change_haru_setting(old:String, style:String, gender:String)
+    public func change_haru_setting(old:String, style:String, gender:String, onsuccess: @escaping () -> (), onfailure: @escaping () -> ())
     {
         
         if HaruSettingDict.validate(old:old, style:style, gender:gender)
@@ -169,12 +175,20 @@ class User
                         self.HaruSetting["Style"] = style
                         self.HaruSetting["Gender"] = gender
                         
-                        print("Haru setting changed")
-                        
                         debugPrint(self.HaruSetting)
+                        
+                        onsuccess()
+                    }
+                    else
+                    {
+                        onfailure()
                     }
                 }
             }
+        }
+        else
+        {
+            onfailure()
         }
     }
 }
