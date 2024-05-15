@@ -100,6 +100,7 @@ class HaruSettingViewController: UIViewController {
                 button.setTitleColor(UIColor(red: 119/255, green: 78/255, blue: 61/255, alpha: 1), for: .normal) // 초기 텍스트 색상 설정
             }
         }
+        print("Selected Option: \(sender.title(for: .normal) ?? "")")
 
         // 선택된 버튼의 스타일을 변경합니다.
         sender.backgroundColor = UIColor(red: 0.5059, green: 0.7176, blue: 0.5294, alpha: 1.0) // 버튼 눌렀을 때의 색상 변경
@@ -120,8 +121,6 @@ class HaruSettingViewController: UIViewController {
 
     // "변경 완료" 버튼을 눌렀을 때의 동작
     @objc private func completeButtonTapped() {
-        
-        User.instance.change_haru_setting(old: selectedAgeGroup!, style: selectedSpeakingStyle!, gender: selectedGender!)
         
         // Storyboard와 ViewController의 Identifier 확인 필요
         let mystoryboard = UIStoryboard(name: "Main", bundle: nil)
