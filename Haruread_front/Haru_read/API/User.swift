@@ -24,6 +24,10 @@ class User
         let success: Bool
     }
     
+    struct SignupResponse: Decodable{
+        let success: Bool
+    }
+    
     
     //define request param struct
     struct LoginRequestParam: Encodable{
@@ -95,30 +99,29 @@ class User
         return
     }
     
-    private func check_auth()
-    {
-        AF.request(User.host + "members/auth/", method: .get).responseDecodable(of: AuthResponse.self){res in
-            guard case .success(let auth_response) = res.result else{
-                print("Auth check failed: \(res.description)")
-                return
-            }
-            
-            User.instance.is_authenticated = auth_response.is_authenticated
-        }
-    }
-    
-    public func signup(username: String, password1: String, password2: String, email: String, nick_name: String)
+    public func signup(username: String, password1: String, password2: String, email: String, nick_name: String, onsuccess: @escaping () -> ())
     {
         
         
         self.get_csrf_token(endpoint: "members/join/"){ token in
             let param = SignupRequestParam(username: username, password1:password1, password2: password2, email:email, nick_name:nick_name, csrfmiddlewaretoken: token)
-            AF.request(User.host+"members/join/", method: .post, parameters: param).responseString{res in
-                print(res)
+            AF.request(User.host+"members/join/", method: .post, parameters: param).responseDecodable(of: SignupResponse.self){res in
+                guard case .success(let signup_response) = res.result else {
+                    User.instance.is_authenticated = false
+                    return
+                }
+                User.instance.is_authenticated = signup_response.success
+                
+                if User.instance.is_authenticated
+                {
+                    onsuccess()
+                }
+                
             }
         }
     }
-    public func login(username: String, password: String)
+    
+    public func login(username: String, password: String, onsuccess: @escaping () -> ())
     {
         self.get_csrf_token(endpoint: "members/join/"){ token in
             let param = LoginRequestParam(username: username, password: password, csrfmiddlewaretoken: token)
@@ -126,20 +129,19 @@ class User
             
             
             AF.request(User.host+"members/login/", method: .post, parameters: param, encoder: URLEncodedFormParameterEncoder(destination: .methodDependent)).responseString{res in
-                self.check_auth()
                 
-                if(self.is_authenticated == false)
-                {
-                    print("login failed")
+                guard case .success(_) = res.result else{
+                    return
                 }
-                else
-                {
-                    print("login successed")
-                }
+                
+                onsuccess()
+                
             }
         }
         
     }
+        
+    
     
     public func change_haru_setting(old:String, style:String, gender:String)
     {
