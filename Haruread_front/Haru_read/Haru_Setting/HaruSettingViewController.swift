@@ -105,23 +105,26 @@ class HaruSettingViewController: UIViewController {
         sender.backgroundColor = UIColor(red: 0.5059, green: 0.7176, blue: 0.5294, alpha: 1.0) // 버튼 눌렀을 때의 색상 변경
         sender.setTitleColor(.white, for: .normal)
         
-        // 데이터 전달
-        guard let section = sender.superview else { return }
-
-        // 선택된 값 저장
-        if section.tag == 0 { // 성별 섹션
-            selectedGender = sender.titleLabel?.text
-        } else if section.tag == 1 { // 연령대 섹션
-            selectedAgeGroup = sender.titleLabel?.text
-        } else if section.tag == 2 { // 발화 스타일 섹션
-            selectedSpeakingStyle = sender.titleLabel?.text
-        }
+        // 섹션 제목에 따라 적절한 변수에 값을 저장합니다.
+                let title = (sender.superview?.subviews.first as? UILabel)?.text
+                let value = sender.title(for: .normal) ?? ""
+                
+                switch title {
+                case "성별":
+                    selectedGender = value
+                case "연령대":
+                    selectedAgeGroup = value
+                case "발화스타일":
+                    selectedSpeakingStyle = value
+                default:
+                    break
+                }
+        
+    
     }
 
     // "변경 완료" 버튼을 눌렀을 때의 동작
     @objc private func completeButtonTapped() {
-        
-        User.instance.change_haru_setting(old: selectedAgeGroup!, style: selectedSpeakingStyle!, gender: selectedGender!)
         
         // Storyboard와 ViewController의 Identifier 확인 필요
         let mystoryboard = UIStoryboard(name: "Main", bundle: nil)
