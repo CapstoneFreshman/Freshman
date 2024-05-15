@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -191,6 +190,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="회원가입"/>
+                                <connections>
+                                    <action selector="SignupButtonHandler:" destination="44H-Yf-OLa" eventType="touchUpInside" id="2uQ-Sy-7yZ"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="arrowshape.left" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fQW-Xx-K5i">
                                 <rect key="frame" x="16" y="85.666666666666742" width="46" height="29"/>
@@ -202,6 +204,13 @@
                         <color key="backgroundColor" red="0.99607843159999998" green="0.98431372640000003" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="pAp-bO-mVg"/>
+                    <connections>
+                        <outlet property="EmailField" destination="0mw-ZN-HuH" id="hhz-D0-2LG"/>
+                        <outlet property="IdField" destination="XjR-fG-8cP" id="SRn-qe-CUq"/>
+                        <outlet property="NicknameField" destination="tKI-jD-myg" id="7uG-Bs-ueu"/>
+                        <outlet property="PasswordField1" destination="qJC-Yb-Uvs" id="vtr-En-B8c"/>
+                        <outlet property="PasswordField2" destination="I6y-1v-rDn" id="nFH-RU-YpG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ixu-JX-82R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
