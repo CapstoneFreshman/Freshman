@@ -8,6 +8,7 @@
 import UIKit
 
 class SignupViewController: UIViewController {
+    let mystoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +28,12 @@ class SignupViewController: UIViewController {
     
     
     
-    
-    
     @IBAction func SignupButtonHandler(_ sender: Any) {
-        User.instance.signup(username: IdField.text!, password1: PasswordField1.text!, password2: PasswordField2.text!, email: EmailField.text!, nick_name: NicknameField.text!)
+        User.instance.signup(username: IdField.text!, password1: PasswordField1.text!, password2: PasswordField2.text!, email: EmailField.text!, nick_name: NicknameField.text!){
+            let homeViewController = self.mystoryboard.instantiateViewController(withIdentifier: "TabViewController")
+            homeViewController.modalPresentationStyle = .fullScreen
+            self.present(homeViewController, animated: true, completion: nil)
+        }
     }
     
     
