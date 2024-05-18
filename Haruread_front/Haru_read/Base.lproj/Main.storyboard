@@ -283,6 +283,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="diaryButton:" destination="g8v-ce-D5W" eventType="touchUpInside" id="APh-G7-JrX"/>
+                                    <action selector="selectButton:" destination="xYG-KM-HG3" eventType="touchUpInside" id="LwL-Js-AqR"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KhF-oQ-hnq">
@@ -398,7 +399,7 @@
         <!--Record View Controller-->
         <scene sceneID="Sdb-Hh-FwW">
             <objects>
-                <viewController id="KSB-UL-x9K" customClass="RecordViewController" customModule="Haru_read" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecordViewController" id="KSB-UL-x9K" customClass="RecordViewController" customModule="Haru_read" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LPs-VI-5Me" customClass="Re">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -408,12 +409,35 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="작성 완료"/>
+                                <connections>
+                                    <segue destination="M2k-Mb-5QP" kind="show" id="nf0-kt-TRU"/>
+                                </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dnr-w8-80j">
+                                <rect key="frame" x="70" y="387" width="75" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="RecordBtn:" destination="KSB-UL-x9K" eventType="touchUpInside" id="hyX-wD-hig"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7R-Rj-AlN">
+                                <rect key="frame" x="166" y="394" width="46" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4lQ-UY-1gB"/>
                         <color key="backgroundColor" red="0.99607843159999998" green="0.98431372640000003" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <navigationItem key="navigationItem" id="06E-KM-xFW"/>
+                    <connections>
+                        <outlet property="RecordBtn" destination="Dnr-w8-80j" id="RV7-iN-ZYK"/>
+                        <outlet property="RecordTimeLB" destination="M7R-Rj-AlN" id="pcj-gs-QgU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="15c-S9-Yw7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -424,7 +448,7 @@
             <objects>
                 <viewController id="M2k-Mb-5QP" customClass="SubmitViewController" customModule="Haru_read" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Soh-YP-h40">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XBk-pF-92L">
