@@ -17,6 +17,7 @@ class User
     }
     
     struct ProfileGetResponse: Decodable{
+        let id: String
         let nick_name: String
         let HARU_OLD: Int
         let HARU_STYLE: Int
@@ -24,6 +25,7 @@ class User
     }
     
     struct UserProfile{
+        let id: String
         let nick_name: String
         let old: String
         let style: String
@@ -157,6 +159,15 @@ class User
         }
     }
     
+    private func onloginsuccess()
+    {
+        self.get_profile{
+            print("login success, get profile success")
+        } onfailure: {
+            print("login success, get profile failed")
+        }
+    }
+    
     public func login(username: String, password: String, onsuccess: @escaping () -> (), onfailure: @escaping () -> ())
     {
         self.get_csrf_token{ token in
@@ -176,9 +187,8 @@ class User
                     onfailure()
                     return
                 }
-                
+                self.is_authenticated = true
                 onsuccess()
-                
             }
         }
         
@@ -200,6 +210,7 @@ class User
                     if HaruSettingDict.validate(old: user_profile.HARU_OLD, style: user_profile.HARU_STYLE, gender: user_profile.HARU_GENDER)
                     {
                         self.profile = UserProfile(
+                            id: user_profile.id,
                             nick_name: user_profile.nick_name,
                             old: HaruSettingDict.OldArray[user_profile.HARU_OLD],
                             style: HaruSettingDict.StyleArray[user_profile.HARU_STYLE],
