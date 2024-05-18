@@ -126,7 +126,7 @@ class HaruSettingViewController: UIViewController {
     // "변경 완료" 버튼을 눌렀을 때의 동작
     @objc private func completeButtonTapped() {
         
-        User.instance.change_haru_setting(old: selectedAgeGroup!, style: selectedSpeakingStyle!, gender: selectedGender!){
+        User.instance.change_haru_setting(old: selectedAgeGroup, style: selectedSpeakingStyle, gender: selectedGender){
             
             //onsuccess
             User.instance.get_profile{

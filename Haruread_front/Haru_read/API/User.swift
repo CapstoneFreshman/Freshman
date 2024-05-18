@@ -82,13 +82,21 @@ class User
         static let GenderArray: [String] = ["남자", "여자"]
         
         static func validate(old: String?, style: String?, gender: String?) -> Bool {
-            guard let old = old, let style = style, let gender = gender else {
-                return false // If any parameter is nil, return false
+            
+            var oldValid = true
+            var styleValid = true
+            var genderValid = true
+            
+            if old != nil {
+                oldValid = Old.keys.contains(old!)
             }
             
-            let oldValid = Old.keys.contains(old)
-            let styleValid = Style.keys.contains(style)
-            let genderValid = Gender.keys.contains(gender)
+            if style != nil{
+                styleValid = Style.keys.contains(style!)
+            }
+            if gender != nil{
+                genderValid = Gender.keys.contains(gender!)
+            }
             
             return oldValid && styleValid && genderValid
         }
@@ -253,7 +261,7 @@ class User
         }
     }
     
-    public func change_haru_setting(old:String, style:String, gender:String, onsuccess: @escaping () -> (), onfailure: @escaping () -> ())
+    public func change_haru_setting(old:String?, style:String?, gender:String?, onsuccess: @escaping () -> (), onfailure: @escaping () -> ())
     {
         
         if HaruSettingDict.validate(old:old, style:style, gender:gender)
@@ -261,9 +269,9 @@ class User
             
             self.get_csrf_token{token in
                 let param: HaruSettingChangeRequestParam = HaruSettingChangeRequestParam(
-                    HARU_OLD: HaruSettingDict.Old[old]!,
-                    HARU_STYLE: HaruSettingDict.Style[style]!,
-                    HARU_GENDER: HaruSettingDict.Gender[gender]!,
+                    HARU_OLD: HaruSettingDict.Old[(old ?? User.instance.profile?.old)!]!,
+                    HARU_STYLE: HaruSettingDict.Style[(style ?? User.instance.profile?.style)!]!,
+                    HARU_GENDER: HaruSettingDict.Gender[(gender ?? User.instance.profile?.gender)!]!,
                     csrfmiddlewaretoken: token
                 )
                 
