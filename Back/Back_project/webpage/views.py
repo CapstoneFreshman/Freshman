@@ -11,6 +11,7 @@ from webpage.form import CustomUserCreationForm,CustomUserChangeForm, HaruSettin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.views.decorators.http import require_http_methods
+from .models import User
 
 
 
@@ -22,6 +23,23 @@ from haru.models import Haru_setting
 def index(request):
     return render(request, 'webpage/index.html')
 
+@require_http_methods(['POST'])
+def api_login(request):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    
+    if not username or not password:
+        return JsonResponse({'error': 'Username and password are required.'}, status=400)
+    
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return JsonResponse({'message': 'Login successful.'})
+    else:
+        return JsonResponse({'error': 'Invalid credentials.'}, status=401)
+
+
+
 @login_required(login_url='webpage:login')
 def logout_view(request):
     logout(request)
@@ -29,10 +47,11 @@ def logout_view(request):
 
 
 
-@require_http_methods(['GET','POST'])
+@require_http_methods(['POST'])
 def join_view(request: HttpRequest):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
+        res = {"success":False}
         if form.is_valid() and request.user.is_authenticated == False:
             form.save()
             username = form.cleaned_data.get('username')
@@ -42,10 +61,18 @@ def join_view(request: HttpRequest):
 
             haru_setting = Haru_setting.create(user.pk)
             haru_setting.save()
+            res['success'] = True
 
-            return redirect('webpage:index')
+        else:
+            print(form.is_valid())
+            print(request.user.is_authenticated)
+
+
+        return JsonResponse(res)
+
     else:
         return JsonResponse({'csrf_token':csrf.get_token(request)})
+
 
 @login_required
 @require_http_methods(['GET', 'POST'])
@@ -60,10 +87,9 @@ def update(request):
     return render(request, 'webpage/update.html', {'form': form})
 
 
-@login_required
 @require_http_methods(['GET', 'POST'])
 def haru_setting_view(request):
-    if request.method == 'POST' and request.user.authenticated:
+    if request.method == 'POST' and request.user.is_authenticated:
         form = HaruSettingChangeForm(request.POST)
         res = {"success":False}
         if form.is_valid():
@@ -73,13 +99,54 @@ def haru_setting_view(request):
                 new_setting.pk = request.user.pk
                 new_setting.save()
                 res['success'] = True
-
-
-
         return JsonResponse(res)
+    elif request.method == 'GET' and request.user.is_authenticated:
+        res = {}
+        try:
+            user_setting = Haru_setting.objects.get(USER_ID=request.user.pk)
+            res["HARU_OLD"]  = user_setting.HARU_OLD
+            res["HARU_STYLE"]  = user_setting.HARU_STYLE
+            res["HARU_GENDER"]  = user_setting.HARU_GENDER
+
+        except Haru_setting.DoesNotExist:
+            res['error'] = "setting not found"
+
+        finally:
+            return JsonResponse(res)
+
+    else:
+        return JsonResponse({"error": "login first"})
+
+
+
+@require_http_methods(['GET'])
+def profile_view(request: HttpRequest):
+    res = {}
+    if request.user.is_authenticated:
+        try:
+            user = User.objects.get(id=request.user.pk)
+            user_setting = Haru_setting.objects.get(USER_ID=request.user.pk)
+            res['nick_name'] = user.nick_name
+            res['id'] = user.username
+            res["HARU_OLD"]  = user_setting.HARU_OLD
+            res["HARU_STYLE"]  = user_setting.HARU_STYLE
+            res["HARU_GENDER"]  = user_setting.HARU_GENDER
+
+        except Haru_setting.DoesNotExist:
+            res['error'] = "user or setting not found"
+
+    else:
+        res['nick_name'] = "anonymous"
+        res['id'] = "anonymous"
+        res["HARU_OLD"]  = -1
+        res["HARU_STYLE"]  = -1
+        res["HARU_GENDER"]  = -1
+
+    return JsonResponse(res)
+        
+
+
+
+@require_http_methods(['GET'])
+def csrf_token_view(request: HttpRequest):
     return JsonResponse({'csrf_token':csrf.get_token(request)})
-    
-
-
-def auth_view(request: HttpRequest):
-    return JsonResponse({"is_authenticated": request.user.is_authenticated})
