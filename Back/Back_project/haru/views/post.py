@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 
 from .upload_file_to_s3 import upload_wav_to_s3
-from ..models import DIARY,DIARY_DETAIl
+from ..models import DIARY,DIARY_DETAIL
 from django.http import HttpResponse,HttpResponseBadRequest
 from datetime import datetime
 from . import temp_voice

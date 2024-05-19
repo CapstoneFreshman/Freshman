@@ -5,7 +5,7 @@ import os
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
-from ..models import DIARY,DIARY_DETAIl
+from ..models import DIARY,DIARY_DETAIL
 from datetime import datetime, timedelta
 from calendar import monthrange
 from django.db.models import Q
@@ -60,7 +60,7 @@ def get_date(request):
 def get_diary(request, user_id,date):
     bucket_name = "freshmanproject"
     diary = DIARY.objects.filter(USER_ID=user_id, DATE=date)
-    detail = DIARY_DETAIl.objects.filter(ID=diary.ID)
+    detail = DIARY_DETAIL.objects.filter(ID=diary.ID)
 
     # S3 접근을 위한 인증 정보 설정
     s3 = boto3.client('s3')
