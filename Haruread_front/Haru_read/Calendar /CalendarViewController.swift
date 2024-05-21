@@ -12,10 +12,8 @@ class CalendarViewController: UIViewController, FSCalendarDelegate {
         calendar = FSCalendar(frame: CGRect(x: 0, y: 200, width: self.view.bounds.width, height: 300))
         view.addSubview(calendar)
         
-        // Set the calendar delegate
         calendar.delegate = self
         
-        // Additional calendar configuration (optional)
         calendar.scrollDirection = .horizontal
         calendar.scope = .month
     }
@@ -31,18 +29,6 @@ class CalendarViewController: UIViewController, FSCalendarDelegate {
                 
         // 년, 월, 일을 정수형으로 출력
         print("년: \(year), 월: \(month), 일: \(day)")
-    }
-    @IBAction func DiaryBtn(_ sender: Any) {
-        // Storyboard와 ViewController의 Identifier 확인 필요
-        let mystoryboard = UIStoryboard(name: "Main", bundle: nil)
- 
-        let DiaryCheckViewController = mystoryboard.instantiateViewController(withIdentifier: "DiaryCheckViewController")
-        // 모달 전환 스타일 설정
-        DiaryCheckViewController.modalTransitionStyle = .crossDissolve
-        DiaryCheckViewController.modalPresentationStyle = .overFullScreen
-        
-        // 모달 방식으로 뷰 컨트롤러를 표시
-        self.present(DiaryCheckViewController, animated: true, completion: nil)
     }
     
 }
