@@ -6,7 +6,7 @@ import bcrypt
 
 from django.views import View
 from django.http import JsonResponse
-from webpage.form import CustomUserCreationForm,CustomUserChangeForm, HaruSettingChangeForm
+from .form import CustomUserCreationForm,CustomUserChangeForm, HaruSettingChangeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.views.decorators.http import require_http_methods

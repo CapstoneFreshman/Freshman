@@ -1,26 +1,27 @@
 import json
 import mimetypes
 import os
-
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
-from ..models import DIARY,DIARY_DETAIl
+from haru.models import DIARY,DIARY_DETAIL
 from datetime import datetime, timedelta
 from calendar import monthrange
 from django.db.models import Q
 from django.http import HttpResponse
 import boto3
-
+from time import timezone
 
 def get_diary_entries_for_month(year, month):
+    today = timezone.now().date()
     start_date = datetime(year, month, 1)
     _, last_day = monthrange(year, month)
     end_date = datetime(year, month, last_day)
 
     # 범위에 해당하는 데이터 조회
     diary_entries = DIARY.objects.filter(
-        date__range=(start_date, end_date)
+        date__range=(start_date, end_date),
+        date__lte = today
     )
 
     emo_list = [entry.emo for entry in diary_entries]
@@ -35,9 +36,9 @@ def get_calendar(request):
         user_id = request.user.id
     else:
         messages.warning(request, "로그인이 필요한 서비스입니다.")
-        return render('webpage:index')
+        return redirect('webpage:index')
     if request.method == "POST":
-        selected_date = request.POST.GET('selected_date')
+        selected_date = request.POST.get('selected_date')
     context = get_diary_entries_for_month(selected_date['year'],selected_date['month'])
     return render(request, 'calendar.html', context['emo_list'],context['last_day'])
 
@@ -60,7 +61,7 @@ def get_date(request):
 def get_diary(request, user_id,date):
     bucket_name = "freshmanproject"
     diary = DIARY.objects.filter(USER_ID=user_id, DATE=date)
-    detail = DIARY_DETAIl.objects.filter(ID=diary.ID)
+    detail = DIARY_DETAIL.objects.filter(ID=diary.ID)
 
     # S3 접근을 위한 인증 정보 설정
     s3 = boto3.client('s3')
