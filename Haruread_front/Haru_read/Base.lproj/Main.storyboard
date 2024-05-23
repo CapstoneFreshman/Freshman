@@ -301,7 +301,7 @@
                                     <fragment content="하루">
                                         <attributes>
                                             <color key="NSColor" red="0.46666666666666667" green="0.30588235294117649" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="41" name="HakgyoansimWoojuR"/>
+                                            <font key="NSFont" metaFont="system" size="41"/>
                                             <font key="NSOriginalFont" metaFont="system" size="20"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -309,14 +309,14 @@
                                     <fragment content=" ">
                                         <attributes>
                                             <color key="NSColor" red="0.46666666666666667" green="0.30588235294117649" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="41" name="HakgyoansimWoojuR"/>
+                                            <font key="NSFont" metaFont="system" size="41"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="읽기">
                                         <attributes>
                                             <color key="NSColor" red="0.46666666666666667" green="0.30588235294117649" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="41" name="HakgyoansimWoojuR"/>
+                                            <font key="NSFont" metaFont="system" size="41"/>
                                             <font key="NSOriginalFont" metaFont="system" size="20"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -325,7 +325,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="vAu-J1-a8e">
-                                <rect key="frame" x="16" y="183" width="140" height="52"/>
+                                <rect key="frame" x="14" y="183" width="141" height="52"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <locale key="locale" localeIdentifier="ko_KR"/>
                             </datePicker>
@@ -335,59 +335,59 @@
                                 <attributedString key="attributedText">
                                     <fragment content="오늘">
                                         <attributes>
-                                            <font key="NSFont" size="20" name="HakgyoansimWoojuR"/>
+                                            <font key="NSFont" metaFont="system" size="20"/>
                                             <font key="NSOriginalFont" metaFont="system" size="20"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content=" ">
                                         <attributes>
-                                            <font key="NSFont" size="20" name="HakgyoansimWoojuR"/>
+                                            <font key="NSFont" metaFont="system" size="20"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="하루">
                                         <attributes>
-                                            <font key="NSFont" size="20" name="HakgyoansimWoojuR"/>
+                                            <font key="NSFont" metaFont="system" size="20"/>
                                             <font key="NSOriginalFont" metaFont="system" size="20"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content=" ">
                                         <attributes>
-                                            <font key="NSFont" size="20" name="HakgyoansimWoojuR"/>
+                                            <font key="NSFont" metaFont="system" size="20"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="당신의">
                                         <attributes>
-                                            <font key="NSFont" size="20" name="HakgyoansimWoojuR"/>
+                                            <font key="NSFont" metaFont="system" size="20"/>
                                             <font key="NSOriginalFont" metaFont="system" size="20"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content=" ">
                                         <attributes>
-                                            <font key="NSFont" size="20" name="HakgyoansimWoojuR"/>
+                                            <font key="NSFont" metaFont="system" size="20"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="감정을">
                                         <attributes>
-                                            <font key="NSFont" size="20" name="HakgyoansimWoojuR"/>
+                                            <font key="NSFont" metaFont="system" size="20"/>
                                             <font key="NSOriginalFont" metaFont="system" size="20"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content=" ">
                                         <attributes>
-                                            <font key="NSFont" size="20" name="HakgyoansimWoojuR"/>
+                                            <font key="NSFont" metaFont="system" size="20"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="기록해주세요">
                                         <attributes>
-                                            <font key="NSFont" size="20" name="HakgyoansimWoojuR"/>
+                                            <font key="NSFont" metaFont="system" size="20"/>
                                             <font key="NSOriginalFont" metaFont="system" size="20"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -579,6 +579,9 @@
                     <connections>
                         <outlet property="NameLabel" destination="qLd-md-qa7" id="kOu-nu-pNw"/>
                         <outlet property="gender" destination="zOa-0f-qOc" id="7fa-8C-J9i"/>
+                        <outlet property="id" destination="Twa-ka-bS2" id="5XY-QA-VG8"/>
+                        <outlet property="old" destination="GUq-5G-LqY" id="P2B-Es-iwQ"/>
+                        <outlet property="style" destination="bhZ-83-DRq" id="Vgr-Du-7c1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kX9-zy-wAJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

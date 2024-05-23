@@ -34,6 +34,12 @@ class SignupViewController: UIViewController {
             homeViewController.modalPresentationStyle = .fullScreen
             self.present(homeViewController, animated: true, completion: nil)
         }
+        
+        onfailure:
+        {
+            //do something when signup failed
+            print("SignupViewController(Signup failed): Not implemented")
+        }
     }
     
     

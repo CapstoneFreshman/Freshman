@@ -64,11 +64,22 @@ class LoginViewController: UIViewController {
         
         User.instance.login(username: idTextField.text!, password: passwordTextField.text!){
             //onsuccess
-            
+            User.instance.get_profile(onsuccess: {
+                print("Profile Loaded")
+                debugPrint(User.instance.profile!)
+            }, onfailure: {
+                print("Profile Load Failed")
+            })
             // HomeViewController로 전환
             let homeViewController = self.mystoryboard.instantiateViewController(withIdentifier: "TabViewController")
             homeViewController.modalPresentationStyle = .fullScreen
             self.present(homeViewController, animated: true, completion: nil)
+        }
+            
+        onfailure:
+        {
+            //do something on failure
+            print("LoginViewController(Login Failed): Not implemented")
         }
     }
     @IBAction func SignupButton(_ sender: Any) {

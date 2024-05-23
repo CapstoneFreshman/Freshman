@@ -16,10 +16,18 @@ class MypageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Label_title()
-        NameLabel.text = "새로운 텍스트"
+        load_profile()
         drawLine()
       
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        load_profile()
+    }
+    
+    
+    
     let mystoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
     @IBAction func page_button(_ sender: Any) {
         let HaruSettingViewController = mystoryboard.instantiateViewController(withIdentifier: "HaruSettingViewController")
@@ -32,6 +40,35 @@ class MypageViewController: UIViewController {
     }
     
     @IBOutlet weak var gender: UILabel!
+    
+    
+    @IBOutlet weak var old: UILabel!
+    
+    
+    @IBOutlet weak var style: UILabel!
+    
+    
+    @IBOutlet weak var id: UILabel!
+    
+    public func load_profile() {
+        if User.instance.is_authenticated
+        {
+            if User.instance.profile == nil{
+                print("User Profile not loaded yet")
+                User.instance.get_profile(onsuccess: load_profile, onfailure: {print("load_profile get_profile failed")})
+                return
+            }
+            
+            
+            old.text = User.instance.profile?.old
+            style.text = User.instance.profile?.style
+            gender.text = User.instance.profile?.gender
+            NameLabel.text = User.instance.profile?.nick_name
+            id.text = User.instance.profile?.id
+            
+        }
+    }
+    
     
     //func button(){
      //   let screenWidth = UIScreen.main.bounds.width
