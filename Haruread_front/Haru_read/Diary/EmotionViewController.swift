@@ -2,6 +2,7 @@ import UIKit
 
 class EmotionViewController: UIViewController {
     
+    @IBOutlet weak var SelectBtn: UIButton!
     var buttons: [UIButton] = []
     let emotions = ["기쁨", "슬픔", "분노", "무감정"]
     let buttonColors = [
@@ -10,12 +11,16 @@ class EmotionViewController: UIViewController {
         UIColor(red: 0.93, green: 0.95, blue: 0.95, alpha: 1.0),
         UIColor(red: 0.79, green: 0.93, blue: 0.90, alpha: 1.0)
     ]
-    var selectedEmotion: String?  // 선택된 감정을 저장할 변수 (이거쓰셈)
+    var selectedEmotion: String?  // 선택된 감정을 저장할 변수
+    
+    @IBOutlet weak var DateLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtons()
         view.backgroundColor = UIColor(red: 0.98, green: 0.97, blue: 0.95, alpha: 1.0)  // Pale background
+        SelectBtn.layer.cornerRadius = 20
+        setCurrentDateTime()
     }
     
     func setupButtons() {
@@ -57,13 +62,19 @@ class EmotionViewController: UIViewController {
     
     let mystoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
     @IBAction func selectButton(_ sender: Any) {
-        let EmotionViewController = mystoryboard.instantiateViewController(withIdentifier: "RecordViewController")
+        let recordViewController = mystoryboard.instantiateViewController(withIdentifier: "RecordViewController")
         // 모달 전환 스타일 설정
-        EmotionViewController.modalTransitionStyle = .crossDissolve
-        EmotionViewController.modalPresentationStyle = .overFullScreen
+        recordViewController.modalTransitionStyle = .crossDissolve
+        recordViewController.modalPresentationStyle = .overFullScreen
         
         // 모달 방식으로 뷰 컨트롤러를 표시
-        self.present(EmotionViewController, animated: true, completion: nil)
+        self.present(recordViewController, animated: true, completion: nil)
     }
     
+    func setCurrentDateTime() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let currentDate = Date()
+        DateLabel.text = dateFormatter.string(from: currentDate)
+    }
 }

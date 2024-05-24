@@ -6,14 +6,29 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPl
     var audioRecorder: AVAudioRecorder!
     var audioFile: URL!
     var progressTimer: Timer?
-        
+    
     let timeRecordSelector: Selector = #selector(RecordViewController.updateRecordTime)
     @IBOutlet var RecordBtn: UIButton! // 녹음 시작 버튼
     @IBOutlet var RecordTimeLB: UILabel! // 녹음 시간 라벨
+    @IBOutlet weak var SucBtn: UIButton! // 화면 전환 버튼
+    @IBOutlet weak var WaveformView: UIView! // 음성 파형 뷰
+    
+    var isRecording = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initRecord() // 초기화 코드를 viewDidLoad에서 호출
+        SucBtn.layer.cornerRadius = 20
+        
+        // 디버깅 코드 추가: WaveformView가 제대로 초기화되었는지 확인
+        if WaveformView == nil {
+            print("WaveformView is nil")
+        } else {
+            print("WaveformView is initialized")
+        }
+        
+        // 초기 파형 그리기
+        drawInitialWaveform()
     }
     
     // 녹음 파일 초기화
@@ -73,10 +88,12 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPl
         guard let title = sender.titleLabel?.text else { return } // 안전하게 언래핑
         if title == "Record" { // 녹음을 시작함
             audioRecorder.record()
+            isRecording = true
             sender.setTitle("Stop", for: .normal)
             progressTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: timeRecordSelector, userInfo: nil, repeats: true)
         } else { // 녹음을 중지함
             audioRecorder.stop()
+            isRecording = false
             if let timer = progressTimer { // progressTimer가 nil이 아닐 때만 invalidate 호출
                 timer.invalidate()
             }
@@ -87,6 +104,81 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPl
     
     // 0.1초마다 호출되며 녹음 시간을 표시함
     @objc func updateRecordTime() {
+        audioRecorder.updateMeters()
         RecordTimeLB.text = convertNSTimeIntervalToString(audioRecorder.currentTime)
+        updateWaveform()
+    }
+    
+    // 초기 파형 그리기
+    func drawInitialWaveform() {
+        guard let waveformView = WaveformView else { return }
+        
+        let wavePath = UIBezierPath()
+        let centerY = waveformView.bounds.height / 2
+        
+        wavePath.move(to: CGPoint(x: 0, y: centerY))
+        wavePath.addLine(to: CGPoint(x: waveformView.bounds.width, y: centerY))
+        
+        let waveLayer = CAShapeLayer()
+        waveLayer.frame = waveformView.bounds
+        waveLayer.path = wavePath.cgPath
+        waveLayer.lineWidth = 3.0
+        waveLayer.strokeColor = UIColor(red: 129/255, green: 183/255, blue: 135/255, alpha: 1.0).cgColor
+        waveLayer.fillColor = UIColor.clear.cgColor
+        
+        // Add initial waveform layer
+        waveformView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        waveformView.layer.addSublayer(waveLayer)
+    }
+    
+    // 파형 업데이트
+    func updateWaveform() {
+        guard let waveformView = WaveformView else {
+            print("WaveformView is nil in updateWaveform")
+            return
+        }
+        
+        let wavePath = UIBezierPath()
+        let centerY = waveformView.bounds.height / 2
+        
+        if isRecording {
+            audioRecorder.updateMeters()
+            let normalizedValue = normalizedPowerLevel(fromDecibels: audioRecorder.averagePower(forChannel: 0))
+            let maxAmplitude = waveformView.bounds.height / 2 * CGFloat(normalizedValue)
+            
+            wavePath.move(to: CGPoint(x: 0, y: centerY))
+            
+            for x in stride(from: 0, to: waveformView.bounds.width, by: 5) {
+                let scalingFactor = CGFloat(drand48())
+                let y = centerY - maxAmplitude * scalingFactor
+                wavePath.addLine(to: CGPoint(x: CGFloat(x), y: y))
+            }
+        } else {
+            wavePath.move(to: CGPoint(x: 0, y: centerY))
+            wavePath.addLine(to: CGPoint(x: waveformView.bounds.width, y: centerY))
+        }
+        
+        let waveLayer = CAShapeLayer()
+        waveLayer.frame = waveformView.bounds
+        waveLayer.path = wavePath.cgPath
+        waveLayer.lineWidth = 3.0
+        waveLayer.strokeColor = UIColor(red: 129/255, green: 183/255, blue: 135/255, alpha: 1.0).cgColor
+        waveLayer.fillColor = UIColor.clear.cgColor
+        
+        // Remove previous waveform layers
+        waveformView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        
+        // Add new waveform layer
+        waveformView.layer.addSublayer(waveLayer)
+    }
+    
+    func normalizedPowerLevel(fromDecibels decibels: Float) -> Float {
+        if decibels < -80 {
+            return 0.0
+        } else if decibels >= 0 {
+            return 1.0
+        } else {
+            return (decibels + 80) / 80
+        }
     }
 }
