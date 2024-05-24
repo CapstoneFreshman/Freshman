@@ -296,7 +296,7 @@
             </objects>
             <point key="canvasLocation" x="2725.9541984732823" y="-527.46478873239437"/>
         </scene>
-        <!--Item-->
+        <!--하루 일기-->
         <scene sceneID="7DE-bR-ZJn">
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" id="g8v-ce-D5W" customClass="HomeViewController" customModule="Haru_read" customModuleProvider="target" sceneMemberID="viewController">
@@ -338,7 +338,9 @@
                         <viewLayoutGuide key="safeArea" id="MB3-OC-y4d"/>
                         <color key="backgroundColor" red="1" green="0.98591452840000005" blue="0.96147328620000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="WV8-2V-T4F"/>
+                    <tabBarItem key="tabBarItem" title="하루 일기" image="mic.circle" catalog="system" selectedImage="waveform.circle" id="WV8-2V-T4F">
+                        <color key="badgeColor" red="0.50588235290000005" green="0.71764705880000002" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="diaryButton" destination="oFs-Yg-tuN" id="F4O-Uw-czk"/>
                     </connections>
@@ -671,7 +673,7 @@
                                     <fragment content="일기">
                                         <attributes>
                                             <color key="NSColor" red="0.46666666666666667" green="0.30588235294117649" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="20" name=".AppleSDGothicNeoI-Regular"/>
+                                            <font key="NSFont" metaFont="system" size="20"/>
                                             <font key="NSOriginalFont" metaFont="system" size="20"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -686,7 +688,7 @@
                                     <fragment content="작성이">
                                         <attributes>
                                             <color key="NSColor" red="0.46666666666666667" green="0.30588235294117649" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="20" name=".AppleSDGothicNeoI-Regular"/>
+                                            <font key="NSFont" metaFont="system" size="20"/>
                                             <font key="NSOriginalFont" metaFont="system" size="20"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -701,7 +703,7 @@
                                     <fragment content="완료되었습니다">
                                         <attributes>
                                             <color key="NSColor" red="0.46666666666666667" green="0.30588235294117649" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="20" name=".AppleSDGothicNeoI-Regular"/>
+                                            <font key="NSFont" metaFont="system" size="20"/>
                                             <font key="NSOriginalFont" metaFont="system" size="20"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -719,7 +721,7 @@
             </objects>
             <point key="canvasLocation" x="5109.160305343511" y="147.88732394366198"/>
         </scene>
-        <!--Item-->
+        <!--감정 다이어리-->
         <scene sceneID="Ga6-Zy-5bF">
             <objects>
                 <viewController storyboardIdentifier="CalendarViewController" id="jFe-2e-eLs" customClass="CalendarViewController" customModule="Haru_read" customModuleProvider="target" sceneMemberID="viewController">
@@ -796,7 +798,7 @@
                         <viewLayoutGuide key="safeArea" id="rlI-eh-GhM"/>
                         <color key="backgroundColor" red="0.99607843159999998" green="0.98431372640000003" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="wVE-BU-YGm"/>
+                    <tabBarItem key="tabBarItem" title="감정 다이어리" image="note.text" catalog="system" id="wVE-BU-YGm"/>
                     <navigationItem key="navigationItem" id="yf0-eR-0Pm"/>
                     <connections>
                         <outlet property="SelectBtn" destination="2Vf-BZ-1c3" id="Rzn-XY-Ihr"/>
@@ -901,7 +903,7 @@
             </objects>
             <point key="canvasLocation" x="3527.480916030534" y="859.85915492957747"/>
         </scene>
-        <!--Item-->
+        <!--하루 설정-->
         <scene sceneID="bcT-hs-kb5">
             <objects>
                 <viewController storyboardIdentifier="MypageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zBR-t0-H5k" customClass="MypageViewController" customModule="Haru_read" customModuleProvider="target" sceneMemberID="viewController">
@@ -1064,8 +1066,9 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Rbg-cP-tkY"/>
                         <color key="backgroundColor" red="0.99607843159999998" green="0.98431372640000003" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="tintColor" red="0.50588235290000005" green="0.71764705880000002" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="45W-bb-JGp"/>
+                    <tabBarItem key="tabBarItem" title="하루 설정" image="gearshape" catalog="system" id="45W-bb-JGp"/>
                     <navigationItem key="navigationItem" id="dQW-eb-ker"/>
                     <connections>
                         <outlet property="NameLabel" destination="qLd-md-qa7" id="kOu-nu-pNw"/>
@@ -1124,7 +1127,8 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qcp-jN-cJS">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <rect key="contentStretch" x="0.0" y="0.0" width="0.80000000000000004" height="1"/>
+                        <color key="selectedImageTintColor" red="0.50588235290000005" green="0.71764705880000002" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="g8v-ce-D5W" kind="relationship" relationship="viewControllers" id="aya-6E-mOW"/>
@@ -1134,13 +1138,18 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e6P-YR-gIR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1599" y="847"/>
+            <point key="canvasLocation" x="1466" y="873"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.50588235290000005" green="0.71764705880000002" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
     <resources>
         <image name="InitHaru.png" width="430" height="376"/>
         <image name="arrowshape.left" catalog="system" width="128" height="104"/>
+        <image name="gearshape" catalog="system" width="128" height="123"/>
+        <image name="mic.circle" catalog="system" width="128" height="123"/>
+        <image name="note.text" catalog="system" width="128" height="107"/>
         <image name="person.circle" catalog="system" width="128" height="123"/>
+        <image name="waveform.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
