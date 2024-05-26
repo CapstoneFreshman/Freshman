@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
         let screenWidth = UIScreen.main.bounds.width
         self.diaryButton.layer.masksToBounds = true
         self.diaryButton.layer.cornerRadius = 20
-        self.diaryButton.frame = CGRect(x: (screenWidth - 200) / 2, y: 650, width: 200, height: 50)
+        self.diaryButton.frame = CGRect(x: (screenWidth - 200) / 2, y: 680, width: 200, height: 50)
     }
     
     func Label_title(){
@@ -22,7 +22,7 @@ class HomeViewController: UIViewController {
         let screenWidth = UIScreen.main.bounds.width
         let labelWidth: CGFloat = 200
         let labelHeight: CGFloat = 100
-        label.frame = CGRect(x: (screenWidth - labelWidth) / 2, y: 110, width: labelWidth, height: labelHeight) // 중앙 정렬
+        label.frame = CGRect(x: (screenWidth - labelWidth) / 2, y: 100, width: labelWidth, height: labelHeight) // 중앙 정렬
         label.text = "하루\n읽기"
         label.numberOfLines = 0  // 라벨의 줄 수를 무제한으로 설정
         label.textAlignment = .center  // 텍스트를 중앙 정렬
