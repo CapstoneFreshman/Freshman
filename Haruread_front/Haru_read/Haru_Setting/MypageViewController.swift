@@ -1,20 +1,15 @@
-//
-//  Setting1ViewController.swift
-//  Haru_read
-//
-//  Created by 전서현 on 5/6/24.
-//
-
 import UIKit
-import AudioKit
 
 class MypageViewController: UIViewController {
 
-
-    
+    let mystoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    @IBOutlet weak var UIVew: UIView!
     @IBOutlet weak var NameLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        NameLabel.text = "새로운 텍스트"
+        setupUIVew()
+        addSeparatorLine()
         Label_title()
         load_profile()
         drawLine()
@@ -39,14 +34,11 @@ class MypageViewController: UIViewController {
         self.present(HaruSettingViewController, animated: true, completion: nil)
     }
     
-    @IBOutlet weak var gender: UILabel!
-    
+    @IBOutlet weak var gender: UILabel!   
     
     @IBOutlet weak var old: UILabel!
     
-    
     @IBOutlet weak var style: UILabel!
-    
     
     @IBOutlet weak var id: UILabel!
     
@@ -101,21 +93,24 @@ class MypageViewController: UIViewController {
         linePath2.move(to: CGPoint(x: 10, y: 320))
         linePath2.addLine(to: CGPoint(x: view.bounds.width - 10, y: 320))
 
-        let shapeLayer1 = CAShapeLayer()
-        shapeLayer1.path = linePath1.cgPath
-        shapeLayer1.strokeColor = UIColor.black.cgColor
-        shapeLayer1.lineWidth = 1
-        shapeLayer1.fillColor = UIColor.clear.cgColor
-        let shapeLayer2 = CAShapeLayer()
-        shapeLayer2.path = linePath2.cgPath
-        shapeLayer2.strokeColor = UIColor.black.cgColor
-        shapeLayer2.lineWidth = 1
-        shapeLayer2.fillColor = UIColor.clear.cgColor
-
-        view.layer.addSublayer(shapeLayer1)
-        view.layer.addSublayer(shapeLayer2)
-    }
+    func setupUIVew() {
+           UIVew.layer.cornerRadius = 20
+           UIVew.layer.borderWidth = 2
+           UIVew.layer.borderColor = UIColor(hex: "7BA880").cgColor
+           UIVew.backgroundColor = .clear
+       }
+    func addSeparatorLine() {
+            let separatorLine = UIView()
+            separatorLine.backgroundColor = UIColor(hex: "7BA880")
+            separatorLine.translatesAutoresizingMaskIntoConstraints = false
+            UIVew.addSubview(separatorLine)
+            
+            NSLayoutConstraint.activate([
+                separatorLine.centerYAnchor.constraint(equalTo: UIVew.centerYAnchor),
+                separatorLine.leadingAnchor.constraint(equalTo: UIVew.leadingAnchor, constant: 10),
+                separatorLine.trailingAnchor.constraint(equalTo: UIVew.trailingAnchor, constant: -10),
+                separatorLine.heightAnchor.constraint(equalToConstant: 1)
+            ])
+        }
     
-
- 
 }
