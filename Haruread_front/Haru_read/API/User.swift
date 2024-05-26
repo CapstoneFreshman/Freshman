@@ -122,7 +122,7 @@ class User
     
     static let instance = User()
     
-    static let host = "http://192.168.45.225:8000/"
+    static let host = "http://175.125.148.178:2871/"
     
     private init() {}
     
