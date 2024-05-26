@@ -18,6 +18,7 @@ class User
     
     struct ProfileGetResponse: Decodable{
         let id: String
+        let email: String
         let nick_name: String
         let HARU_OLD: Int
         let HARU_STYLE: Int
@@ -26,6 +27,7 @@ class User
     
     struct UserProfile{
         let id: String
+        let email: String
         let nick_name: String
         let old: String
         let style: String
@@ -36,6 +38,10 @@ class User
         let HARU_OLD: Int
         let HARU_STYLE: Int
         let HARU_GENDER: Int
+    }
+    
+    struct LogoutResponse: Decodable{
+        let success: Bool
     }
     
     struct HaruSettingChangeResponse: Decodable{
@@ -202,6 +208,21 @@ class User
         
     }
     
+    public func logout()
+    {
+        self.get_csrf_token(){token in
+            AF.request(User.host + "members/logout/", method: .get).responseDecodable(of: LogoutResponse.self){res in
+                guard case .success(let logout_response) = res.result else{
+                    return
+                }
+                
+                if logout_response.success {
+                    User.instance.is_authenticated = false
+                }
+            }
+        }
+    }
+    
     public func get_profile(onsuccess: @escaping () -> (), onfailure: @escaping () -> ())
     {
         if User.instance.is_authenticated
@@ -219,6 +240,7 @@ class User
                     {
                         self.profile = UserProfile(
                             id: user_profile.id,
+                            email: user_profile.email,
                             nick_name: user_profile.nick_name,
                             old: HaruSettingDict.OldArray[user_profile.HARU_OLD],
                             style: HaruSettingDict.StyleArray[user_profile.HARU_STYLE],
