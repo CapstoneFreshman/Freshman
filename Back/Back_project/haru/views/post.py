@@ -9,11 +9,11 @@ import pytz
 import requests
 @csrf_exempt
 def record(request):
-    if not request.user.is_authenticated:
-        return HttpResponseBadRequest("로그인 오류")
-
-    user_id = request.user.id
-
+    # if not request.user.is_authenticated:
+    #     return HttpResponseBadRequest("로그인 오류")
+    #
+    # user_id = request.user.id
+    user_id = 9
     if request.method == "POST":
         KST = pytz.timezone('Asia/Seoul')
         UTC = pytz.timezone('UTC')
@@ -31,6 +31,9 @@ def record(request):
         time_tag = f"{user_id}_{year}{month}{day}{hour}{minute}{second}"
         path_tag = f"ori_{time_tag}.wav"
 
+        files = {
+            'file': (wav_file.name, wav_file.read(), 'audio/wav')
+        }
         if not emo or not wav_file:
             return HttpResponseBadRequest("필수 필드가 누락되었습니다.")
 
@@ -46,31 +49,40 @@ def record(request):
             return HttpResponseBadRequest(f"파일 업로드 예외 발생: {e}")
 
 
+
         new_diary = DIARY(
-            USER_ID_id=user_id,
+            USER_ID=user_id,
             DATE=date,
             EMO=emo,
             ORI_FILE_DIR=ori_file_path
         )
         new_diary.save()
         id = new_diary.id
-        haru_info = Haru_setting.objects.filter(ID=user_id)
-        flask_server_url = 'http://127.0.0.1:5001/receive'
-        files = {
-            'file': (wav_file.name, wav_file.read(), 'audio/wav')
-        }
+        # haru_info = Haru_setting.objects.get(USER_ID=user_id)
+        flask_server_url = 'http://127.0.0.1:5000/upload'
+        # json_data = {
+        #     'data': json.dumps({
+        #         'gender' : haru_info.HARU_GENDER,
+        #         'age_group' : haru_info.HARU_OLD,
+        #         'speech_style' : haru_info.HARU_STYLE,
+        #         'emotion' : emo,
+        #         'diary_id' : id,
+        #         'user_id' : user_id,
+        #         'time_tag' : time_tag
+        #     })
+        # }
         json_data = {
             'data': json.dumps({
-                'gender' : haru_info.HARU_GENDER,
-                'age_group' : haru_info.HARU_OLD,
-                'speech_style' : haru_info.HARU_STYLE,
-                'emotion' : emo,
-                'diary_id' : id,
-                'user_id' : user_id,
-                'time_tag' : time_tag
+                'gender': 0,
+                'age_group': 2,
+                'speech_style': 2,
+                'emotion': "기쁨",
+                'diary_id': id,
+                'user_id': user_id,
+                'time_tag': time_tag
             })
         }
-        new_response = requests.post(flask_server_url,file = files,data = json_data)
+        new_response = requests.post(flask_server_url, files = files,data = json_data)
         send_request_flask(new_response)
         return HttpResponse("일기 작성 완료.")
     else:
