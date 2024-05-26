@@ -14,10 +14,17 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var IdErrorLabel: UILabel!
     @IBOutlet weak var PasswordErrorLabel1: UILabel!
     @IBOutlet weak var SetupBtn: UIButton!
+    @IBOutlet weak var PreBtn: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        SetupBtn.layer.cornerRadius=5
+        // PreBtn을 사용자 상호작용 가능하게 설정
+            PreBtn.isUserInteractionEnabled = true
+        // 탭 제스처 추가
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(preBtnTapped))
+            PreBtn.addGestureRecognizer(tapGesture)
     }
     
     func setupUI() {
@@ -100,15 +107,7 @@ class SignupViewController: UIViewController {
             EmailErrorLabel.textColor = .red
             EmailErrorLabel.isHidden = false
             isValid = false
-        } 
-        /*
-        else if !isValidEmail(email) {
-            EmailErrorLabel.text = "올바른 이메일 형식으로 입력해주세요"
-            EmailErrorLabel.textColor = .red
-            EmailErrorLabel.isHidden = false
-            isValid = false
-        } 
-         */
+        }
          else {
             EmailErrorLabel.isHidden = true
         }
@@ -145,5 +144,15 @@ class SignupViewController: UIViewController {
         homeViewController.modalPresentationStyle = .fullScreen
         self.present(homeViewController, animated: true, completion: nil)
         
+    }
+    
+    @objc func preBtnTapped() {
+        let LoginViewController = mystoryboard.instantiateViewController(withIdentifier: "LoginViewController")
+        // 모달 전환 스타일 설정
+        LoginViewController.modalTransitionStyle = .crossDissolve
+        LoginViewController.modalPresentationStyle = .overFullScreen
+        
+        // 모달 방식으로 뷰 컨트롤러를 표시
+        self.present(LoginViewController, animated: true, completion: nil)
     }
 }

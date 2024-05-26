@@ -1,7 +1,7 @@
 import UIKit
 import FSCalendar
 
-class CalendarViewController: UIViewController, FSCalendarDelegate {
+class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDelegateAppearance {
 
     var calendar: FSCalendar!
     @IBOutlet weak var SelectBtn: UIButton!
@@ -20,8 +20,8 @@ class CalendarViewController: UIViewController, FSCalendarDelegate {
         calendar.scope = .month
         
         // 캘린더의 폰트 색상을 "81B787"로 변경
-        calendar.appearance.headerTitleColor = UIColor(hex: "7BA880")
-        calendar.appearance.weekdayTextColor = UIColor(hex: "7BA880")
+        calendar.appearance.headerTitleColor = UIColor(hex: "82A987")
+        calendar.appearance.weekdayTextColor = UIColor(hex: "82A987")
         SelectBtn.layer.cornerRadius=20
         
     }
@@ -37,6 +37,18 @@ class CalendarViewController: UIViewController, FSCalendarDelegate {
         
         // 년, 월, 일을 정수형으로 출력
         print("년: \(year), 월: \(month), 일: \(day)")
+    }
+    
+    // FSCalendarDelegateAppearance 메서드
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillSelectionColorFor date: Date) -> UIColor? {
+        return UIColor(hex: "EEA0A0") // 선택된 날짜 색상
+    }
+
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
+        if Calendar.current.isDateInToday(date) {
+            return UIColor(hex: "A0B1EE") // 오늘 날짜 색상
+        }
+        return nil
     }
 }
 
