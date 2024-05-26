@@ -125,7 +125,6 @@ class HaruSettingViewController: UIViewController {
 
     // "변경 완료" 버튼을 눌렀을 때의 동작
     @objc private func completeButtonTapped() {
-        
         // Storyboard와 ViewController의 Identifier 확인 필요
         let mystoryboard = UIStoryboard(name: "Main", bundle: nil)
  
@@ -135,5 +134,4 @@ class HaruSettingViewController: UIViewController {
             self.present(tabBarController, animated: true, completion: nil)
         }
     }
-
 }

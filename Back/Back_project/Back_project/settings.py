@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os.path
+import sys
+
 import environ
 from pathlib import Path
 import pymysql
@@ -17,6 +19,7 @@ pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.append(str(BASE_DIR))
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False)
@@ -171,8 +174,9 @@ LOGIN_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'webpage.User'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_REGION = 'us-west-1'
+AWS_S3_REGION_NAME = 'us-west-1'
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY= env('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME='freshmanproject'
 AWS_QUERYSTRING_AUTH = False
+
