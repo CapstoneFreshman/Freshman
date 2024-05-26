@@ -133,7 +133,7 @@ class User
     {
         
         
-        AF.request(User.host+"members/csrf_token/", method: .get).responseDecodable(of: CSRFTokenResponse.self){ res in
+        AF.request(User.host+"webpage/csrf_token/", method: .get).responseDecodable(of: CSRFTokenResponse.self){ res in
             guard case .success(let token_response) = res.result else {
                 print("\(res.description)")
                 return
@@ -152,7 +152,7 @@ class User
         
         self.get_csrf_token{ token in
             let param = SignupRequestParam(username: username, password1:password1, password2: password2, email:email, nick_name:nick_name, csrfmiddlewaretoken: token)
-            AF.request(User.host+"members/join/", method: .post, parameters: param).responseDecodable(of: SignupResponse.self){res in
+            AF.request(User.host+"webpage/join/", method: .post, parameters: param).responseDecodable(of: SignupResponse.self){res in
                 guard case .success(let signup_response) = res.result else {
                     User.instance.is_authenticated = false
                     onfailure()
@@ -189,7 +189,7 @@ class User
             print("login: id \(username)  passwd \(password)")
             
             
-            AF.request(User.host+"members/login/", method: .post, parameters: param, encoder: URLEncodedFormParameterEncoder(destination: .methodDependent)).responseString{res in
+            AF.request(User.host+"webpage/login/", method: .post, parameters: param, encoder: URLEncodedFormParameterEncoder(destination: .methodDependent)).responseString{res in
                 
                 guard case .success(_) = res.result else{
                     onfailure()
@@ -211,7 +211,7 @@ class User
     public func logout()
     {
         self.get_csrf_token(){token in
-            AF.request(User.host + "members/logout/", method: .get).responseDecodable(of: LogoutResponse.self){res in
+            AF.request(User.host + "webpage/logout/", method: .get).responseDecodable(of: LogoutResponse.self){res in
                 guard case .success(let logout_response) = res.result else{
                     return
                 }
@@ -228,7 +228,7 @@ class User
         if User.instance.is_authenticated
         {
             self.get_csrf_token{token in
-                AF.request(User.host + "members/profile/", method: .get).responseDecodable(of: ProfileGetResponse.self){ res in
+                AF.request(User.host + "webpage/profile/", method: .get).responseDecodable(of: ProfileGetResponse.self){ res in
                     guard case .success(let user_profile) = res.result else {
                         onfailure()
                         return
@@ -267,7 +267,7 @@ class User
         if User.instance.is_authenticated
         {
             self.get_csrf_token{token in
-                AF.request(User.host + "members/haru_setting/", method: .get).responseDecodable(of: HaruSettingGetResponse.self){ res in
+                AF.request(User.host + "webpage/haru_setting/", method: .get).responseDecodable(of: HaruSettingGetResponse.self){ res in
                     guard case .success(let haru_setting) = res.result else {
                         onfailure()
                         return
@@ -299,7 +299,7 @@ class User
                 
                 debugPrint(param)
                 
-                AF.request(User.host+"members/haru_setting/", method: .post, parameters: param, encoder: URLEncodedFormParameterEncoder(destination: .methodDependent)).responseDecodable(of: HaruSettingChangeResponse.self){res in
+                AF.request(User.host+"webpage/haru_setting/", method: .post, parameters: param, encoder: URLEncodedFormParameterEncoder(destination: .methodDependent)).responseDecodable(of: HaruSettingChangeResponse.self){res in
                     guard case .success(let haru_response) = res.result else {
                         return
                     }
