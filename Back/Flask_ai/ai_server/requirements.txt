@@ -1,0 +1,10 @@
+Flask
+requests
+torch==2.0.1+cu117  # 최신 GPU 버전
+torchaudio==2.0.1+cu117
+whisper
+openai
+anthropic
+TTS
+python-dotenv
+ffmpeg-python

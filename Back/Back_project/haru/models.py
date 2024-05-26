@@ -3,7 +3,7 @@ from webpage.models import User
 
 # Create your models here.
 class DIARY(models.Model):
-    USER_ID = models.ForeignKey(User, on_delete=models.CASCADE)
+    USER_ID = models.IntegerField(null=False)
     DATE = models.DateTimeField(null=True,blank=True)
     EMO = models.CharField(max_length=30)
     ORI_FILE_DIR = models.TextField()

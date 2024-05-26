@@ -4,7 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b247ab4-5c84-4b28-86de-3d83045813dc" name="Changes" comment="" />
+    <list default="true" id="6b247ab4-5c84-4b28-86de-3d83045813dc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Back_project/haru/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Back_project/haru/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Back_project/haru/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Back/Back_project/haru/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Back_project/haru/views/post.py" beforeDir="false" afterPath="$PROJECT_DIR$/Back/Back_project/haru/views/post.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Flask_ai/ai_model/0.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Flask_ai/ai_model/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Flask_ai/ai_model/file.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Flask_ai/ai_model/llm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Flask_ai/ai_model/model_download.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Flask_ai/ai_model/output.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Flask_ai/ai_model/stt_file_whisper.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Flask_ai/ai_model/system_prompt/Claude_feedback.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Flask_ai/ai_model/system_prompt/Claude_summary.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Flask_ai/ai_model/system_prompt/GPT_feedback.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Flask_ai/ai_model/system_prompt/GPT_summary.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Flask_ai/ai_model/total.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Flask_ai/ai_model/xtt_infer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Flask_ai/ai_model/xtts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Flask_ai/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Back/Flask_ai/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/MYSQL/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Back/MYSQL/.idea/dataSources.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,6 +55,30 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -41,7 +88,8 @@
       <option name="presentableId" value="Default" />
       <updated>1716726269779</updated>
       <workItem from="1716726275704" duration="1515000" />
-      <workItem from="1716728060203" duration="2514000" />
+      <workItem from="1716728060203" duration="6172000" />
+      <workItem from="1716739678187" duration="823000" />
     </task>
     <servers />
   </component>
@@ -58,5 +106,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>8</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
