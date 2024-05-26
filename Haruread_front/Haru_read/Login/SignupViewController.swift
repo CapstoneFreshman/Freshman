@@ -1,0 +1,47 @@
+//
+//  SignupViewController.swift
+//  Haru_read
+//
+//  Created by 전서현 on 5/5/24.
+//
+
+import UIKit
+
+class SignupViewController: UIViewController {
+    let mystoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+    }
+    
+    @IBOutlet weak var IdField: UITextField!
+    
+    @IBOutlet weak var PasswordField1: UITextField!
+    
+    @IBOutlet weak var PasswordField2: UITextField!
+    
+    @IBOutlet weak var EmailField: UITextField!
+    
+    @IBOutlet weak var NicknameField: UITextField!
+    
+    
+    
+    @IBAction func SignupButtonHandler(_ sender: Any) {
+        User.instance.signup(username: IdField.text!, password1: PasswordField1.text!, password2: PasswordField2.text!, email: EmailField.text!, nick_name: NicknameField.text!){
+            let homeViewController = self.mystoryboard.instantiateViewController(withIdentifier: "TabViewController")
+            homeViewController.modalPresentationStyle = .fullScreen
+            self.present(homeViewController, animated: true, completion: nil)
+        }
+        
+        onfailure:
+        {
+            //do something when signup failed
+            print("SignupViewController(Signup failed): Not implemented")
+        }
+    }
+    
+    
+
+}

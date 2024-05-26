@@ -144,7 +144,6 @@ def profile_view(request: HttpRequest):
         res["HARU_GENDER"]  = -1
 
     return JsonResponse(res)
-        
 
 
 

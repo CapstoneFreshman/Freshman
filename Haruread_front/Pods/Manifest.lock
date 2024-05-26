@@ -1,0 +1,35 @@
+PODS:
+  - Alamofire (5.9.1)
+  - AudioKit (5.1.0):
+    - AudioKit/C (= 5.1.0)
+    - AudioKit/Core (= 5.1.0)
+    - AudioKit/Soundpipe (= 5.1.0)
+    - AudioKit/Sporth (= 5.1.0)
+    - AudioKit/STK (= 5.1.0)
+  - AudioKit/C (5.1.0):
+    - AudioKit/Soundpipe
+    - AudioKit/Sporth
+    - AudioKit/STK
+  - AudioKit/Core (5.1.0):
+    - AudioKit/C
+  - AudioKit/Soundpipe (5.1.0)
+  - AudioKit/Sporth (5.1.0):
+    - AudioKit/Soundpipe
+  - AudioKit/STK (5.1.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - AudioKit
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - AudioKit
+
+SPEC CHECKSUMS:
+  Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
+  AudioKit: 81246a4ccdd7ca3c6e0076f913070e90987b4369
+
+PODFILE CHECKSUM: 5dc7909955220c2509ba2841fe5e693f04e6cc3d
+
+COCOAPODS: 1.15.2
