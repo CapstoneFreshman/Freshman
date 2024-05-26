@@ -10,6 +10,7 @@ from calendar import monthrange
 from django.db.models import Q
 from django.http import HttpResponse
 import boto3
+from django.conf import settings
 from time import timezone
 
 def get_diary_entries_for_month(year, month):
@@ -50,6 +51,9 @@ def get_date(request):
         return render('webpage:index')
     if request.method == "GET":
         date = request.GET.get('date')
+        year = date['year']
+        month = date['month']
+        day = date['month']
         try:
             get_diary(request,user_id,date)
         except Exception as e:
@@ -59,9 +63,9 @@ def get_date(request):
 
 
 def get_diary(request, user_id,date):
-    bucket_name = "freshmanproject"
+    bucket_name = settings.AWS_STORAGE_BUCKET_NAME
     diary = DIARY.objects.filter(USER_ID=user_id, DATE=date)
-    detail = DIARY_DETAIL.objects.filter(ID=diary.ID)
+    detail = DIARY_DETAIL.objects.filter(ID=diary.id)
 
     # S3 접근을 위한 인증 정보 설정
     s3 = boto3.client('s3')

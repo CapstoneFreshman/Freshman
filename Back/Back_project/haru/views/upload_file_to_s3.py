@@ -4,7 +4,7 @@ import boto3
 from django.conf import settings
 from django.http import JsonResponse
 
-def upload_wav_to_s3(request,path_tag):
+def upload_wav_to_s3(request,content,path_tag):
     if request.method == 'POST' and request.FILES['wav_file']:
         wav_file = request.FILES['wav_file']
 
@@ -18,7 +18,7 @@ def upload_wav_to_s3(request,path_tag):
 
         # S3 버킷 이름
         bucket_name = settings.AWS_STORAGE_BUCKET_NAME
-        file_path = os.path.join('ORI_FILE',path_tag)
+        file_path = os.path.join(content,path_tag)
         # S3에 WAV 파일 업로드
         s3_client.upload_fileobj(wav_file, bucket_name, file_path)
 

@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'webpage.apps.WebpageConfig',
-    'haru.apps.DiaryConfig'
+    'haru.apps.DiaryConfig',
 ]
 
 MIDDLEWARE = [

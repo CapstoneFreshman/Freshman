@@ -7,5 +7,6 @@ urlpatterns =[
     path('post/', post.record, name='post'),
     path('calendar/', get.get_calendar,name='get_calendar'),
     path('get/', get.get_date, name='get'),
+    path('build/',post.build_diary, name='build'),
 
 ]
