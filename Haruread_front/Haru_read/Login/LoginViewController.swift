@@ -8,6 +8,7 @@ class LoginViewController: UIViewController {
      let loginButton = UIButton()
      
      override func viewDidLoad() {
+         User.instance.logout()
          super.viewDidLoad()
          setupUI()
          loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)

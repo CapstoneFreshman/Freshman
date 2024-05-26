@@ -125,13 +125,23 @@ class HaruSettingViewController: UIViewController {
 
     // "변경 완료" 버튼을 눌렀을 때의 동작
     @objc private func completeButtonTapped() {
-        // Storyboard와 ViewController의 Identifier 확인 필요
-        let mystoryboard = UIStoryboard(name: "Main", bundle: nil)
- 
-        if let tabBarController = mystoryboard.instantiateViewController(withIdentifier: "TabViewController") as? TabViewController {
-            tabBarController.selectedIndex = 2
-            tabBarController.modalPresentationStyle = .fullScreen
-            self.present(tabBarController, animated: true, completion: nil)
+        
+        User.instance.change_haru_setting(old: selectedAgeGroup, style: selectedSpeakingStyle, gender: selectedGender)
+        {
+            User.instance.get_profile(){
+                // Storyboard와 ViewController의 Identifier 확인 필요
+                let mystoryboard = UIStoryboard(name: "Main", bundle: nil)
+                
+                if let tabBarController = mystoryboard.instantiateViewController(withIdentifier: "TabViewController") as? TabViewController {
+                    tabBarController.selectedIndex = 2
+                    tabBarController.modalPresentationStyle = .fullScreen
+                    self.present(tabBarController, animated: true, completion: nil)
+                }
+            }onfailure: {
+                print("HaruSettingViewController.completeButtonTapped > User.change_haru_setting > User.get_profile failed")
+            }
+        }onfailure: {
+            print("Setting change failed")
         }
     }
 }
