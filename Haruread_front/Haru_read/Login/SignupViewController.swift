@@ -113,7 +113,11 @@ class SignupViewController: UIViewController {
         }
         
         if isValid {
-            showSuccessAlert()
+            User.instance.signup(username: id, password1: password1, password2: password2, email: email, nick_name: nickname){
+                self.showSuccessAlert()
+            }onfailure: {
+                print("User.signup(invoked by SignupViewController) failed")
+            }
         }
     }
     
