@@ -97,6 +97,7 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPl
             }
             progressTimer = nil
             sender.setTitle("Record", for: .normal)
+            User.instance.send_diary(emotion: "TEST", wav_file: audioFile)
         }
     }
     
