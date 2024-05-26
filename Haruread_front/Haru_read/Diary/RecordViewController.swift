@@ -10,7 +10,6 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPl
     let timeRecordSelector: Selector = #selector(RecordViewController.updateRecordTime)
     @IBOutlet var RecordBtn: UIButton! // 녹음 시작 버튼
     @IBOutlet var RecordTimeLB: UILabel! // 녹음 시간 라벨
-    @IBOutlet weak var SucBtn: UIButton! // 화면 전환 버튼
     @IBOutlet weak var WaveformView: UIView! // 음성 파형 뷰
     
     var isRecording = false
@@ -18,7 +17,6 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPl
     override func viewDidLoad() {
         super.viewDidLoad()
         initRecord() // 초기화 코드를 viewDidLoad에서 호출
-        SucBtn.layer.cornerRadius = 20
         
         // 디버깅 코드 추가: WaveformView가 제대로 초기화되었는지 확인
         if WaveformView == nil {
