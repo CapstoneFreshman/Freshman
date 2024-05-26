@@ -5,11 +5,14 @@ import bcrypt
 # Create your views here.
 
 from django.views import View
-from django.http import JsonResponse
-from .form import CustomUserCreationForm,CustomUserChangeForm, HaruSettingChangeForm
+from django.http import JsonResponse, HttpResponse, HttpRequest
+from django.middleware import csrf
+from webpage.form import CustomUserCreationForm,CustomUserChangeForm, HaruSettingChangeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.views.decorators.http import require_http_methods
+from .models import User
+
 
 
 from django.contrib.auth import logout, authenticate, login
@@ -20,18 +23,35 @@ from haru.models import Haru_setting
 def index(request):
     return render(request, 'webpage/index.html')
 
-@login_required(login_url='webpage:login')
+@require_http_methods(['POST'])
+def api_login(request):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    
+    if not username or not password:
+        return JsonResponse({'error': 'Username and password are required.'}, status=400)
+    
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return JsonResponse({'message': 'Login successful.'})
+    else:
+        return JsonResponse({'error': 'Invalid credentials.'}, status=401)
+
+
+
 def logout_view(request):
     logout(request)
-    return redirect('index')
+    return JsonResponse({"success": True})
 
-@require_http_methods(['GET','POST'])
-def join_view(request):
-    if request.user.is_authenticated:
-        return redirect('webpage:index')
+
+
+@require_http_methods(['POST'])
+def join_view(request: HttpRequest):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
+        res = {"success":False}
+        if form.is_valid() and request.user.is_authenticated == False:
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
@@ -40,11 +60,18 @@ def join_view(request):
 
             haru_setting = Haru_setting.create(user.pk)
             haru_setting.save()
+            res['success'] = True
 
-            return redirect('webpage:index')
+        else:
+            print(form.is_valid())
+            print(request.user.is_authenticated)
+
+
+        return JsonResponse(res)
+
     else:
-        form = CustomUserCreationForm()
-    return render(request, 'webpage/join.html', {'form': form})
+        return JsonResponse({'csrf_token':csrf.get_token(request)})
+
 
 @login_required
 @require_http_methods(['GET', 'POST'])
@@ -59,26 +86,67 @@ def update(request):
     return render(request, 'webpage/update.html', {'form': form})
 
 
-@login_required
 @require_http_methods(['GET', 'POST'])
 def haru_setting_view(request):
-    if request.method == 'GET':
-        return render(request, 'webpage/haru_setting.html', {'form' : HaruSettingChangeForm()})
-    elif request.method == 'POST':
+    if request.method == 'POST' and request.user.is_authenticated:
         form = HaruSettingChangeForm(request.POST)
-        if not form.is_valid():
-            return render(request, 'webpage/haru_setting.html', {'form' : HaruSettingChangeForm()})
+        res = {"success":False}
+        if form.is_valid():
+            new_setting = form.save(commit=False)
+
+            if new_setting.validate_setting():
+                new_setting.pk = request.user.pk
+                new_setting.save()
+                res['success'] = True
+        return JsonResponse(res)
+    elif request.method == 'GET' and request.user.is_authenticated:
+        res = {}
+        try:
+            user_setting = Haru_setting.objects.get(USER_ID=request.user.pk)
+            res["HARU_OLD"]  = user_setting.HARU_OLD
+            res["HARU_STYLE"]  = user_setting.HARU_STYLE
+            res["HARU_GENDER"]  = user_setting.HARU_GENDER
+
+        except Haru_setting.DoesNotExist:
+            res['error'] = "setting not found"
+
+        finally:
+            return JsonResponse(res)
+
+    else:
+        return JsonResponse({"error": "login first"})
 
 
-        new_setting = form.save(commit=False)
 
-        if new_setting.validate_setting():
-            new_setting.pk = request.user.pk
-            new_setting.save()
+@require_http_methods(['GET'])
+def profile_view(request: HttpRequest):
+    res = {}
+    if request.user.is_authenticated:
+        try:
+            user = User.objects.get(id=request.user.pk)
+            user_setting = Haru_setting.objects.get(USER_ID=request.user.pk)
+            res['nick_name'] = user.nick_name
+            res['id'] = user.username
+            res['email'] = user.email
+            res["HARU_OLD"]  = user_setting.HARU_OLD
+            res["HARU_STYLE"]  = user_setting.HARU_STYLE
+            res["HARU_GENDER"]  = user_setting.HARU_GENDER
 
-        else:
-            print(new_setting.HARU_OLD)
+        except Haru_setting.DoesNotExist:
+            res['error'] = "user or setting not found"
+
+    else:
+        res['nick_name'] = "anonymous"
+        res['id'] = "anonymous"
+        res['email'] = "anonymous"
+        res["HARU_OLD"]  = -1
+        res["HARU_STYLE"]  = -1
+        res["HARU_GENDER"]  = -1
+
+    return JsonResponse(res)
 
 
-        return redirect('index')
 
+@require_http_methods(['GET'])
+def csrf_token_view(request: HttpRequest):
+    return JsonResponse({'csrf_token':csrf.get_token(request)})
