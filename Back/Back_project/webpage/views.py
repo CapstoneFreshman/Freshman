@@ -40,10 +40,9 @@ def api_login(request):
 
 
 
-@login_required(login_url='webpage:login')
 def logout_view(request):
     logout(request)
-    return redirect('index')
+    return JsonResponse({"success": True})
 
 
 
@@ -128,6 +127,7 @@ def profile_view(request: HttpRequest):
             user_setting = Haru_setting.objects.get(USER_ID=request.user.pk)
             res['nick_name'] = user.nick_name
             res['id'] = user.username
+            res['email'] = user.email
             res["HARU_OLD"]  = user_setting.HARU_OLD
             res["HARU_STYLE"]  = user_setting.HARU_STYLE
             res["HARU_GENDER"]  = user_setting.HARU_GENDER
@@ -138,6 +138,7 @@ def profile_view(request: HttpRequest):
     else:
         res['nick_name'] = "anonymous"
         res['id'] = "anonymous"
+        res['email'] = "anonymous"
         res["HARU_OLD"]  = -1
         res["HARU_STYLE"]  = -1
         res["HARU_GENDER"]  = -1
