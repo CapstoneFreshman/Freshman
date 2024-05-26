@@ -28,6 +28,23 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPl
         // 초기 파형 그리기
         drawInitialWaveform()
     }
+    let mystoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+
+    @IBAction func SubmitTap(_ sender: Any) {
+        //음성 파일 전송
+        User.instance.send_diary(emotion: "TEST", wav_file: audioFile)
+        
+        
+        let LoginViewController = mystoryboard.instantiateViewController(withIdentifier: "SubmitViewController")
+        // 모달 전환 스타일 설정
+        LoginViewController.modalTransitionStyle = .crossDissolve
+        LoginViewController.modalPresentationStyle = .overFullScreen
+        
+        // 모달 방식으로 뷰 컨트롤러를 표시
+        self.present(LoginViewController, animated: true, completion: nil)
+    }
+    
+    
     
     // 녹음 파일 초기화
     func initRecord() {
@@ -97,7 +114,7 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPl
             }
             progressTimer = nil
             sender.setTitle("Record", for: .normal)
-            User.instance.send_diary(emotion: "TEST", wav_file: audioFile)
+            
         }
     }
     
