@@ -325,4 +325,25 @@ class User
             onfailure()
         }
     }
+    
+    public func send_diary(emotion: String, wav_file: URL)
+    {
+        AF.upload(multipartFormData:{ multipartFormData in
+            if let emo = emotion.data(using: .utf8){
+                multipartFormData.append(emo, withName: "EMO")
+            }
+            
+            multipartFormData.append(wav_file, withName: "wav_file", fileName: "recordFile.wav", mimeType: "audio/wav")
+        }, to: User.host+"haru/post/")
+        .response{ response in
+            switch response.result{
+            case .success(let data):
+                if let data = data, let res = String(data: data, encoding: .utf8){
+                    debugPrint("Diary Upload Result: \(res)")
+                }
+            case .failure(let err):
+                    print("Diary Upload failed \(err)")
+            }
+        }
+    }
 }
