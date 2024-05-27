@@ -5,13 +5,18 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDe
 
     var calendar: FSCalendar!
     @IBOutlet weak var SelectBtn: UIButton!
+    @IBOutlet weak var SelectDateLabel: UILabel!
+    // 선택된 날짜의 년, 월, 일을 저장할 변수
+    var selectedYear: Int = 0
+    var selectedMonth: Int = 0
+    var selectedDay: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // 여백을 추가하여 캘린더의 크기와 위치 조정
         let padding: CGFloat = 20
-        calendar = FSCalendar(frame: CGRect(x: padding, y: 200, width: self.view.bounds.width - (padding * 2), height: 300))
+        calendar = FSCalendar(frame: CGRect(x: padding, y: 260, width: self.view.bounds.width - (padding * 2), height: 300))
         view.addSubview(calendar)
         
         calendar.delegate = self
@@ -24,8 +29,34 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDe
         calendar.appearance.weekdayTextColor = UIColor(hex: "82A987")
         SelectBtn.layer.cornerRadius=20
         
+        updateDateLabelWithDate(Date())
+        
     }
     
+    func updateDateLabelWithDate(_ date: Date) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"  // 날짜 형식 지정
+        dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
+        SelectDateLabel.text = dateFormatter.string(from: date)
+        
+        // 연, 월, 일을 변수에 저장
+        let calendar = Calendar.current
+        selectedYear = calendar.component(.year, from: date)
+        selectedMonth = calendar.component(.month, from: date)
+        selectedDay = calendar.component(.day, from: date)
+
+        // 변수 값 출력 (디버깅 용도)
+        print("선택된 날짜 - 년: \(selectedYear), 월: \(selectedMonth), 일: \(selectedDay)")
+            
+    }
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        updateDateLabelWithDate(date)  // 선택한 날짜로 라벨 업데이트
+        
+    }
+        
+    
+    /*
     // 캘린더 데이터 로드 함수
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         let dateFormatter = Calendar.current
@@ -37,7 +68,10 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDe
         
         // 년, 월, 일을 정수형으로 출력
         print("년: \(year), 월: \(month), 일: \(day)")
-    }
+    }*/
+    
+    
+    
     
     // FSCalendarDelegateAppearance 메서드
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillSelectionColorFor date: Date) -> UIColor? {
@@ -50,6 +84,21 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDe
         }
         return nil
     }
+    
+    let mystoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    @IBAction func GetDiaryBtn(_ sender: Any) {
+        // 함수호출
+        
+        // 화면전환
+        let DiaryCheckViewController = mystoryboard.instantiateViewController(withIdentifier: "DiaryCheckViewController")
+        // 모달 전환 스타일 설정
+        DiaryCheckViewController.modalTransitionStyle = .coverVertical
+        DiaryCheckViewController.modalPresentationStyle = .pageSheet
+        // 모달 방식으로 뷰 컨트롤러를 표시
+        self.present(DiaryCheckViewController, animated: true, completion: nil)
+    }
+    
+    
 }
 
 extension UIColor {
