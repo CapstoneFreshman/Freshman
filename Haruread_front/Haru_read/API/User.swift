@@ -76,6 +76,12 @@ class User
         let csrfmiddlewaretoken: String
     }
     
+    struct DateRequestParam: Encodable{
+        let year: Int
+        let month: Int
+        let day: Int
+    }
+    
     
     struct HaruSettingDict{
         static let Old: [String: Int] = ["유년층": 0, "청소년층": 1, "성인층": 2, "노년층": 3]
@@ -346,4 +352,10 @@ class User
             }
         }
     }
+    
+    public func get_date(year: Int, month: Int, day: Int){
+        
+        AF.request(User.host + "haru/get/", method: .get, parameters: DateRequestParam(year: year, month: month, day: day))
+    }
+    
 }
