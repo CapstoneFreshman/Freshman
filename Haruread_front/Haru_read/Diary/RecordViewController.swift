@@ -32,7 +32,7 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPl
 
     @IBAction func SubmitTap(_ sender: Any) {
         //음성 파일 전송
-        User.instance.send_diary(emotion: "TEST", wav_file: audioFile)
+        User.instance.send_diary(emotion: EmotionViewController.selectedEmotion!, wav_file: audioFile)
         
         
         let LoginViewController = mystoryboard.instantiateViewController(withIdentifier: "SubmitViewController")
