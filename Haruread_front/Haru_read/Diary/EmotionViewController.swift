@@ -109,14 +109,16 @@ class EmotionViewController: UIViewController {
     
     let mystoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
     @IBAction func selectButton(_ sender: Any) {
-        let recordViewController = mystoryboard.instantiateViewController(withIdentifier: "RecordViewController")
-        // 모달 전환 스타일 설정
-        recordViewController.modalTransitionStyle = .crossDissolve
-        recordViewController.modalPresentationStyle = .overFullScreen
-        
-        // 모달 방식으로 뷰 컨트롤러를 표시
-        self.present(recordViewController, animated: true, completion: nil)
-        
+        if EmotionViewController.selectedEmotion != nil{
+            let recordViewController = mystoryboard.instantiateViewController(withIdentifier: "RecordViewController")
+            // 모달 전환 스타일 설정
+            recordViewController.modalTransitionStyle = .crossDissolve
+            recordViewController.modalPresentationStyle = .overFullScreen
+            
+            // 모달 방식으로 뷰 컨트롤러를 표시
+            self.present(recordViewController, animated: true, completion: nil)
+            
+            }
         }
     func setCurrentDateTime() {
         let dateFormatter = DateFormatter()
