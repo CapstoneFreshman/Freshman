@@ -10,23 +10,73 @@ import AudioKit
 
 class MypageViewController: UIViewController {
 
-    @IBOutlet weak var haruset_button: UIButton!
+
+    
     @IBOutlet weak var NameLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         Label_title()
-        NameLabel.text = "새로운 텍스트"
+        load_profile()
         drawLine()
-        button()
+      
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        load_profile()
+    }
+    
+    
+    
+    let mystoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    @IBAction func page_button(_ sender: Any) {
+        let HaruSettingViewController = mystoryboard.instantiateViewController(withIdentifier: "HaruSettingViewController")
+        // 모달 전환 스타일 설정
+        HaruSettingViewController.modalTransitionStyle = .crossDissolve
+        HaruSettingViewController.modalPresentationStyle = .overFullScreen
+        
+        // 모달 방식으로 뷰 컨트롤러를 표시
+        self.present(HaruSettingViewController, animated: true, completion: nil)
+    }
+    
     @IBOutlet weak var gender: UILabel!
     
-    func button(){
-        let screenWidth = UIScreen.main.bounds.width
-        self.haruset_button.layer.masksToBounds = true
-        self.haruset_button.layer.cornerRadius = 20
-        self.haruset_button.frame = CGRect(x: (screenWidth - 200) / 2, y: 650, width: 200, height: 50)
+    
+    @IBOutlet weak var old: UILabel!
+    
+    
+    @IBOutlet weak var style: UILabel!
+    
+    
+    @IBOutlet weak var id: UILabel!
+    
+    public func load_profile() {
+        if User.instance.is_authenticated
+        {
+            if User.instance.profile == nil{
+                print("User Profile not loaded yet")
+                User.instance.get_profile(onsuccess: load_profile, onfailure: {print("load_profile get_profile failed")})
+                return
+            }
+            
+            
+            old.text = User.instance.profile?.old
+            style.text = User.instance.profile?.style
+            gender.text = User.instance.profile?.gender
+            NameLabel.text = User.instance.profile?.nick_name
+            id.text = User.instance.profile?.id
+            
+        }
     }
+    
+    
+    //func button(){
+     //   let screenWidth = UIScreen.main.bounds.width
+      //  self.haruset_button.layer.masksToBounds = true
+       // self.haruset_button.layer.cornerRadius = 20
+        //self.haruset_button.frame = CGRect(x: (screenWidth - 200) / 2, y: 650, width: 200, height: 50)
+   // }
+   
     
     func Label_title(){
         let label = UILabel()
@@ -66,5 +116,6 @@ class MypageViewController: UIViewController {
         view.layer.addSublayer(shapeLayer2)
     }
     
+
  
 }

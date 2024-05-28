@@ -10,6 +10,7 @@ class LoginViewController: UIViewController {
      override func viewDidLoad() {
          super.viewDidLoad()
          setupUI()
+         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
      }
      
     func setupUI() {
@@ -51,14 +52,36 @@ class LoginViewController: UIViewController {
             loginButton.backgroundColor = UIColor(red: 0.5059, green: 0.7176, blue: 0.5294, alpha: 1.0)  // 대체 색상 사용
             loginButton.frame = CGRect(x: (screenWidth - 200) / 2, y: 420, width: 200, height: 50)
             loginButton.layer.cornerRadius = 20
-            loginButton.addTarget(self, action: #selector(LoginButton(_:)), for: .touchUpInside)
+            //loginButton.addTarget(self, action: #selector(LoginButton(_:)), for: .touchUpInside)
             view.addSubview(loginButton)
         }
+    
 
     
     let mystoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
-    
+    @objc func loginButtonTapped(_ sender: UIButton) {
+        
+        User.instance.login(username: idTextField.text!, password: passwordTextField.text!){
+            //onsuccess
+            User.instance.get_profile(onsuccess: {
+                print("Profile Loaded")
+                debugPrint(User.instance.profile!)
+            }, onfailure: {
+                print("Profile Load Failed")
+            })
+            // HomeViewController로 전환
+            let homeViewController = self.mystoryboard.instantiateViewController(withIdentifier: "TabViewController")
+            homeViewController.modalPresentationStyle = .fullScreen
+            self.present(homeViewController, animated: true, completion: nil)
+        }
+            
+        onfailure:
+        {
+            //do something on failure
+            print("LoginViewController(Login Failed): Not implemented")
+        }
+    }
     @IBAction func SignupButton(_ sender: Any) {
         let SignupViewController = mystoryboard.instantiateViewController(withIdentifier: "SignupViewController")
         // 모달 전환 스타일 설정
@@ -68,20 +91,7 @@ class LoginViewController: UIViewController {
         // 모달 방식으로 뷰 컨트롤러를 표시
         self.present(SignupViewController, animated: true, completion: nil)
     }
-    
-    @IBAction func LoginButton(_ sender: Any) {
-        if let tabBarController = mystoryboard.instantiateViewController(withIdentifier: "TabViewController") as? UITabBarController {
-            // 모달 전환 스타일을 설정합니다.
-            tabBarController.modalPresentationStyle = .fullScreen
-
-            // 현재 ViewController에서 TabBarController로 전환합니다.
-            self.present(tabBarController, animated: true, completion: nil)
-        } else {
-            // 타입 캐스팅에 실패했을 경우, 에러 메시지를 출력합니다.
-            print("Could not instantiate TabViewController as UITabBarController.")
-        }
-    }
-    
+        
     
 }
 
