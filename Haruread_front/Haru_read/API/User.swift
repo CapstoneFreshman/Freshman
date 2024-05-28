@@ -34,6 +34,11 @@ class User
         let gender: String
     }
     
+    struct DayEmotionPair: Decodable{
+        let day: Int
+        let emo: String
+    }
+    
     struct HaruSettingGetResponse: Decodable{
         let HARU_OLD: Int
         let HARU_STYLE: Int
@@ -57,6 +62,10 @@ class User
         let feedback_text: String
         let original: String
         let feedback: String
+    }
+    
+    struct FetchCalendarResponse: Decodable{
+        let pairs: [DayEmotionPair]
     }
     
     
@@ -372,6 +381,22 @@ class User
                 }
                 
                 onsuccess(diary_info)
+            }
+    }
+    
+    public func fetch_calendar(year: Int, month: Int, onsuccess: @escaping ([DayEmotionPair]) -> (), onfailure: @escaping () -> ())
+    {
+        AF.request(User.host + String(format: "haru/calendar/%d/%d/", year, month), method: .get)
+            .responseDecodable(of: FetchCalendarResponse.self){ res in
+                guard case .success(let fetched_calendar) = res.result else{
+                    onfailure()
+                    return
+                }
+                
+                let pairs = fetched_calendar.pairs
+                
+                onsuccess(pairs)
+                return
             }
     }
     
