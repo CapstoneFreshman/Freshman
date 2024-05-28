@@ -141,15 +141,15 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
             return
         }
         
-        for day in 1...31 {
-            User.instance.get_date(year: year, month: month, day: day) { diary in
-                let dateKey = String(format: "%d-%02d-%02d", year, month, day)
-                self.emotionData[dateKey] = diary.emo
-                print("Loaded emotion for \(dateKey): \(diary.emo)")
-                self.calendar.reloadData()
-            } onfailure: {
-                print(String(format: "diary(%d-%d-%d) loading failed", year, month, day))
+        User.instance.fetch_calendar(year: year, month: month){ pairs in
+            for p in pairs{
+                let dateKey = String(format: "%d-%02d-%02d", year, month, p.day)
+                self.emotionData[dateKey] = p.emo
             }
+            
+            self.calendar.reloadData()
+        }onfailure: {
+            print("CalendarViewController: fetch calendar failed")
         }
     }
 }
