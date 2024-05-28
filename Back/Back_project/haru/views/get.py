@@ -8,7 +8,7 @@ from haru.models import DIARY,DIARY_DETAIL
 from datetime import datetime, timedelta
 from calendar import monthrange
 from django.db.models import Q
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import boto3
 from django.conf import settings
 from time import timezone
@@ -54,49 +54,75 @@ def get_date(request):
         year = date['year']
         month = date['month']
         day = date['month']
-        try:
-            get_diary(request,user_id,date)
-        except Exception as e:
-            return HttpResponse("다이어리의 호출을 실패하였습니다. "+str(e),status=500)
-    else:
-        return
 
+        diary, detail, response = get_diary(request,user_id,date)
 
-def get_diary(request, user_id,date):
-    bucket_name = settings.AWS_STORAGE_BUCKET_NAME
-    diary = DIARY.objects.filter(USER_ID=user_id, DATE=date)
-    detail = DIARY_DETAIL.objects.filter(ID=diary.id)
+        if diary == None and detail == None:
+            return response
 
-    # S3 접근을 위한 인증 정보 설정
-    s3 = boto3.client('s3')
-    try:
-        # S3에서 파일 다운로드
-        ori_file = s3.get_object(Bucket=bucket_name, Key= diary.ORI_FILE_DIR)
-        # 파일의 MIME 타입 가져오기
-        content_type_ori = ori_file['ContentType']
-        # 파일 데이터 가져오기
-        file_content_ori = ori_file['Body'].read()
-        feedback_file = s3.get_object(Bucket=bucket_name, Key=detail.FEEDBACK_FILE_DIR)
-        content_type_feedback = feedback_file['ContentType']
-        file_content_feedback = feedback_file['Body'].read()
-        response_data= {
-            'emo':diary.EMO,
+        res = {
+            "emo": diary.EMO,
             'feedback_text': detail.FEEDBACK_TEXT,
-            'ori_file': {
-                'content_type': content_type_ori,
-                'file_content': file_content_ori.decode('utf-8')
-            },
-            'feedback_file': {
-                'content_type': content_type_feedback,
-                'file_content': file_content_feedback.decode('utf-8')
-            }
+            'original': f"haru/voice/{date.year}/{date.month}/{date.day}/original/",
+            'feedback': f"haru/voice/{date.year}/{date.month}/{date.day}/feedback/"
         }
-        json_response = json.dumps(response_data)
-        http_response = HttpResponse(json_response, content_type='application/json')
-        return render(request, 'result.html',http_response)
+
+        
+        return JsonResponse(res) 
+ 
+    else:
+        return HttpResponse("Invalid Method", status=405)
+
+
+def get_diary(request, user_id, date):
+    diary_query = DIARY.objects.filter(USER_ID=user_id, DATE=date)
+    if diary_query.count() != 1:
+        return None, None, HttpResponse(f"Diary on {date} not found", status=404)
+
+    diary = diary_query.first()
+
+    detail_query = DIARY_DETAIL.objects.filter(ID=diary.id)
+
+    if detail_query.count() != 1:
+        return None, None, HttpResponse(f"Internal Error: found {detail_query.count()} DIARY_DETAIL for DIARY({date})", status=500)
+
+    detail = detail_query.first()
+
+    return diary, detail, None
+
+
+def get_voice_file(request, year, month, day, type):
+    if request.user.is_authenticated == False:
+        return HttpResponse("Login Required", status=403)
+
+    bucket_name = settings.AWS_STORAGE_BUCKET_NAME
+    s3 = boto3.client('s3')
+
+    date = {}
+
+    date['year'] = year
+    date['month'] = month
+    date['month'] = day
+
+    diary, detail, response = get_diary(request, request.user.id, date)
+
+    if diary == None and detail == None:
+        return response
+
+    key = ""
+
+    if type == 'original':
+        key = diary.ORI_FILE_DIR
+
+    elif type == 'feedback':
+        key = detail.FEEDBACK_FILE_DIR
+
+    try:
+        voice_file = s3.get_object(Bucket=bucket_name, Key=key)
+        voice_data = voice_file.read()
+
+        return HttpResponse(voice_data, content_type="audio/wav")
+
     except Exception as e:
         return HttpResponse("Error retrieving file from S3: " + str(e), status=500)
-
-
-
 
