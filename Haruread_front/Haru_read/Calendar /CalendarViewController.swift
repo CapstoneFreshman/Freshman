@@ -87,15 +87,25 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDe
     
     let mystoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
     @IBAction func GetDiaryBtn(_ sender: Any) {
+        
+        User.instance.get_date(year: selectedYear, month: selectedMonth, day: selectedDay){ [self]diary in
+            print(String(format: "diary(%d-%d-%d) loaded", self.selectedYear, self.selectedMonth, self.selectedDay))
+            debugPrint(diary)
+            User.instance.loaded_diary = diary
+            
+            let diaryCheckViewController = mystoryboard.instantiateViewController(withIdentifier: "DiaryCheckViewController") as! DiaryCheckViewController
+            // 모달 전환 스타일 설정
+            diaryCheckViewController.modalTransitionStyle = .coverVertical
+            diaryCheckViewController.modalPresentationStyle = .pageSheet
+            // 모달 방식으로 뷰 컨트롤러를 표시
+            self.present(diaryCheckViewController, animated: true, completion: nil)
+            
+        }onfailure: {
+            print(String(format: "diary(%d-%d-%d) loading failed", self.selectedYear, self.selectedMonth, self.selectedDay))
+        }
         // 함수호출
         
         // 화면전환
-        let DiaryCheckViewController = mystoryboard.instantiateViewController(withIdentifier: "DiaryCheckViewController")
-        // 모달 전환 스타일 설정
-        DiaryCheckViewController.modalTransitionStyle = .coverVertical
-        DiaryCheckViewController.modalPresentationStyle = .pageSheet
-        // 모달 방식으로 뷰 컨트롤러를 표시
-        self.present(DiaryCheckViewController, animated: true, completion: nil)
     }
     
     

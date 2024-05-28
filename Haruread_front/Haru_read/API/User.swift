@@ -52,6 +52,13 @@ class User
         let success: Bool
     }
     
+    struct DateResponse: Decodable{
+        let emo: String
+        let feedback_text: String
+        let original: String
+        let feedback: String
+    }
+    
     
     //define request param struct
     struct LoginRequestParam: Encodable{
@@ -74,12 +81,6 @@ class User
         let HARU_STYLE: Int
         let HARU_GENDER: Int
         let csrfmiddlewaretoken: String
-    }
-    
-    struct DateRequestParam: Encodable{
-        let year: Int
-        let month: Int
-        let day: Int
     }
     
     
@@ -130,10 +131,11 @@ class User
     
     static let host = "http://175.125.148.178:2871/"
     
-    private init() {}
-    
     var is_authenticated = false
     var profile: UserProfile? = nil
+    var loaded_diary: DateResponse? = nil
+    
+    private init() {}
     
     private func get_csrf_token(completion: @escaping (String) -> Void) -> Void
     {
@@ -353,9 +355,24 @@ class User
         }
     }
     
-    public func get_date(year: Int, month: Int, day: Int){
+    public func get_date(year: Int, month: Int, day: Int, onsuccess: @escaping (DateResponse) -> (), onfailure: @escaping () -> ()){
         
-        AF.request(User.host + "haru/get/", method: .get, parameters: DateRequestParam(year: year, month: month, day: day))
+        AF.request(User.host + String(format:"haru/get/%d/%d/%d/",year, month, day), method: .get)
+            .responseDecodable(of: DateResponse.self){response in
+                guard case .success(let diary_info) = response.result else{
+                    onfailure()
+                    return
+                }
+                
+                if (400...599).contains(response.response!.statusCode)
+                {
+                    debugPrint(response)
+                    onfailure()
+                    return
+                }
+                
+                onsuccess(diary_info)
+            }
     }
     
 }
