@@ -110,10 +110,15 @@ def get_voice_file(request, year, month, day, type):
 
     diary, detail, response = get_diary(request, request.user.id, date)
 
-    if diary == None and detail == None:#for test
-        with open("/home/pwndorei/project/test/test0.wav", "rb") as sample:
-            response =  HttpResponse(sample.read(), content_type="audio/wav")
+    if diary == None or detail == None or diary.ORI_FILE_DIR == "Test Original Path" or detail.FEEDBACK_FILE_DIR == "Test Feedback Path":#for test
+        from Back_project.settings import MEDIA_ROOT
+        if type == "original" or type == "feedback":
+            with open(f"{MEDIA_ROOT}/{type}.wav", "rb") as sample:
+                response =  HttpResponse(sample.read(), content_type="audio/wav")
 
+        else:
+            response = HttpResponse(f"Diary not found + invalid type({type})", status="404")
+            
         return response
 
     key = ""
