@@ -97,20 +97,45 @@ class DiaryCheckViewController: UIViewController {
 
 
     @objc func playAudio(_ sender: UIButton) {
-        guard let url = Bundle.main.url(forResource: "Alarm01", withExtension: "wav") else {
-                    print("Error: Audio file not found")
-                    return
-                }
-                do {
-                    audioPlayer = try AVAudioPlayer(contentsOf: url)
-                    audioPlayer?.play()
-                } catch let error {
-                    print("Error playing audio: \(error.localizedDescription)")
-                }
+        var player: AVAudioPlayer? = nil
+        switch(sender.self.accessibilityLabel){
+        case "feedback_audio":
+            player = User.instance.feedbackAudioPlayer
+        case "diary_audio":
+            player = User.instance.originalAudioPlayer
+        default:
+            player = nil
+        }
+        
+        print("play")
+        debugPrint(sender.self.accessibilityLabel)
+        
+        if player == nil{
+            return
+        }
+        
+        player?.play()
     }
 
     @objc func pauseAudio(_ sender: UIButton) {
-        audioPlayer?.pause()
+        var player: AVAudioPlayer? = nil
+        switch(sender.self.accessibilityLabel){
+        case "feedback_audio":
+            player = User.instance.feedbackAudioPlayer
+        case "diary_audio":
+            player = User.instance.originalAudioPlayer
+        default:
+            player = nil
+        }
+        
+        print("stop")
+        debugPrint(sender.self.accessibilityLabel)
+        
+        if player == nil{
+            return
+        }
+        
+        player?.stop()
     }
 
     func setupConstraints() {
