@@ -5,6 +5,7 @@
 //  Created by 이준수 on 2024/05/12.
 //
 
+import AVFoundation
 import Foundation
 import Alamofire
 
@@ -143,6 +144,9 @@ class User
     var is_authenticated = false
     var profile: UserProfile? = nil
     var loaded_diary: DateResponse? = nil
+    
+    var originalAudioPlayer: AVAudioPlayer? = nil
+    var feedbackAudioPlayer: AVAudioPlayer? = nil
     
     private init() {}
     
@@ -380,8 +384,43 @@ class User
                     return
                 }
                 
+                self.get_voice_file(diary: diary_info)
+                
                 onsuccess(diary_info)
             }
+    }
+    
+    public func get_voice_file(diary: DateResponse){
+        AF.request(User.host + diary.original, method: .get).responseData{res in
+            guard case .success (let data) = res.result else {
+                self.originalAudioPlayer = nil
+                return
+            }
+            
+            do{
+                self.originalAudioPlayer = try AVAudioPlayer(data: data)
+                print("User.get_voice_file (url: \(diary.original) success")
+                
+            }catch let err{
+                print("User.get_voice_file (url: \(diary.original) failed while creating AVAudioPlayer")
+                print("\(err.localizedDescription)")
+            }
+        }
+        AF.request(User.host + diary.feedback, method: .get).responseData{res in
+            guard case .success (let data) = res.result else {
+                self.feedbackAudioPlayer = nil
+                return
+            }
+            
+            do{
+                self.feedbackAudioPlayer = try AVAudioPlayer(data: data)
+                print("User.get_voice_file (url: \(diary.feedback) success")
+                
+            }catch let err{
+                print("User.get_voice_file (url: \(diary.feedback) failed while creating AVAudioPlayer")
+                print("\(err.localizedDescription)")
+            }
+        }
     }
     
     public func fetch_calendar(year: Int, month: Int, onsuccess: @escaping ([DayEmotionPair]) -> (), onfailure: @escaping () -> ())
