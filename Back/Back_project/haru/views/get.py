@@ -3,7 +3,7 @@ import mimetypes
 import os
 from django.shortcuts import render,redirect
 from django.contrib import messages
-from django.contrib.auth.models import User
+from webpage.models import User
 from haru.models import DIARY,DIARY_DETAIL
 from datetime import datetime, timedelta
 from calendar import monthrange
@@ -13,59 +13,69 @@ import boto3
 from django.conf import settings
 from time import timezone
 
-def get_diary_entries_for_month(year, month):
-    today = timezone.now().date()
+def get_diary_entries_for_month(user_id, year, month):
+    user = User.objects.get(id=user_id)
     start_date = datetime(year, month, 1)
-    _, last_day = monthrange(year, month)
-    end_date = datetime(year, month, last_day)
+    _, end_day = monthrange(year, month)
+    end_date = datetime(year, month, end_day)
+    start_day = start_date.day
 
-    # 범위에 해당하는 데이터 조회
-    diary_entries = DIARY.objects.filter(
-        date__range=(start_date, end_date),
-        date__lte = today
-    )
+    diary_query = DIARY.objects.filter(DATE__year=str(year),
+                                       DATE__month=str(month),
+                                       USER_ID=user)
 
-    emo_list = [entry.emo for entry in diary_entries]
+    pairs = []
+    
+    for i in range(start_day, end_day+1):
+        diary = diary_query.filter(DATE__day=str(i))
+        if diary.count() != 1:
+            continue
 
-    days_in_month = last_day
-    emo_list += [None] * (days_in_month - len(emo_list))
+        diary = diary.first()
 
-    return {'emo_list':emo_list,'last_day':last_day}
+        pairs.append({
+            "day": i,
+            "emo": diary.EMO
+        })
 
-def get_calendar(request):
+    return pairs
+
+
+def get_calendar(request, year, month):
     if request.user.is_authenticated:
         user_id = request.user.id
     else:
-        messages.warning(request, "로그인이 필요한 서비스입니다.")
-        return redirect('webpage:index')
-    if request.method == "POST":
-        selected_date = request.POST.get('selected_date')
-    context = get_diary_entries_for_month(selected_date['year'],selected_date['month'])
-    return render(request, 'calendar.html', context['emo_list'],context['last_day'])
+        return HttpResponse("Login First", status=403)
+    pairs = get_diary_entries_for_month(user_id, year, month)
+    return JsonResponse({'pairs' : pairs})
 
-def get_date(request):
+def get_date(request, year, month, day):
     if request.user.is_authenticated:
         user_id = request.user.id
     else:
         messages.warning(request, "로그인이 필요한 서비스입니다.")
         return render('webpage:index')
     if request.method == "GET":
-        date = request.GET.get('date')
-        year = date['year']
-        month = date['month']
-        day = date['month']
+
+        date = datetime(year,month,day)
 
         diary, detail, response = get_diary(request,user_id,date)
 
-        if diary == None and detail == None:
-            return response
+        if diary == None and detail == None: #for test
+            res = {
+                "emo": "테스트 감정",
+                'feedback_text': "테스트 피드백 텍스트",
+                'original': f"haru/voice/{date.year}/{date.month}/{date.day}/original/",
+                'feedback': f"haru/voice/{date.year}/{date.month}/{date.day}/feedback/"
+            }
 
-        res = {
-            "emo": diary.EMO,
-            'feedback_text': detail.FEEDBACK_TEXT,
-            'original': f"haru/voice/{date.year}/{date.month}/{date.day}/original/",
-            'feedback': f"haru/voice/{date.year}/{date.month}/{date.day}/feedback/"
-        }
+        else:
+            res = {
+                "emo": diary.EMO,
+                'feedback_text': detail.FEEDBACK_TEXT,
+                'original': f"haru/voice/{date.year}/{date.month}/{date.day}/original/",
+                'feedback': f"haru/voice/{date.year}/{date.month}/{date.day}/feedback/"
+            }
 
         
         return JsonResponse(res) 
@@ -95,18 +105,20 @@ def get_voice_file(request, year, month, day, type):
     if request.user.is_authenticated == False:
         return HttpResponse("Login Required", status=403)
 
-    bucket_name = settings.AWS_STORAGE_BUCKET_NAME
-    s3 = boto3.client('s3')
 
-    date = {}
-
-    date['year'] = year
-    date['month'] = month
-    date['month'] = day
+    date = datetime(year, month, day)
 
     diary, detail, response = get_diary(request, request.user.id, date)
 
-    if diary == None and detail == None:
+    if diary == None or detail == None or diary.ORI_FILE_DIR == "Test Original Path" or detail.FEEDBACK_FILE_DIR == "Test Feedback Path":#for test
+        from Back_project.settings import MEDIA_ROOT
+        if type == "original" or type == "feedback":
+            with open(f"{MEDIA_ROOT}/{type}.wav", "rb") as sample:
+                response =  HttpResponse(sample.read(), content_type="audio/wav")
+
+        else:
+            response = HttpResponse(f"Diary not found + invalid type({type})", status="404")
+            
         return response
 
     key = ""
@@ -118,6 +130,8 @@ def get_voice_file(request, year, month, day, type):
         key = detail.FEEDBACK_FILE_DIR
 
     try:
+        bucket_name = settings.AWS_STORAGE_BUCKET_NAME
+        s3 = boto3.client('s3')
         voice_file = s3.get_object(Bucket=bucket_name, Key=key)
         voice_data = voice_file.read()
 
@@ -125,4 +139,3 @@ def get_voice_file(request, year, month, day, type):
 
     except Exception as e:
         return HttpResponse("Error retrieving file from S3: " + str(e), status=500)
-
