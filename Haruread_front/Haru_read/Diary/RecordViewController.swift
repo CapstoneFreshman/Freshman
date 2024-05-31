@@ -35,7 +35,15 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPl
 
     @IBAction func SubmitTap(_ sender: Any) {
         //음성 파일 전송
-        User.instance.send_diary(emotion: EmotionViewController.selectedEmotion!, wav_file: audioFile)
+        User.instance.send_diary(emotion: EmotionViewController.selectedEmotion!, wav_file: audioFile){
+            let LoginViewController = self.mystoryboard.instantiateViewController(withIdentifier: "SubmitViewController")
+            // 모달 전환 스타일 설정
+            LoginViewController.modalTransitionStyle = .crossDissolve
+            LoginViewController.modalPresentationStyle = .overFullScreen
+            
+            // 모달 방식으로 뷰 컨트롤러를 표시
+            self.present(LoginViewController, animated: true, completion: nil)
+        }
         // 검정색 반투명 뷰 생성
         let overlayView = UIView(frame: self.view.bounds)
         overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.75)
@@ -49,15 +57,6 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPl
         self.view.addSubview(loadingView)
 
         
-        /*
-        let LoginViewController = mystoryboard.instantiateViewController(withIdentifier: "SubmitViewController")
-        // 모달 전환 스타일 설정
-        LoginViewController.modalTransitionStyle = .crossDissolve
-        LoginViewController.modalPresentationStyle = .overFullScreen
-        
-        // 모달 방식으로 뷰 컨트롤러를 표시
-        self.present(LoginViewController, animated: true, completion: nil)
-         */
     }
     
     

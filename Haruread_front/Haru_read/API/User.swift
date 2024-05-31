@@ -347,7 +347,7 @@ class User
         }
     }
     
-    public func send_diary(emotion: String, wav_file: URL)
+    public func send_diary(emotion: String, wav_file: URL, onsuccess: @escaping ()->())
     {
         AF.upload(multipartFormData:{ multipartFormData in
             if let emo = emotion.data(using: .utf8){
@@ -365,6 +365,7 @@ class User
             case .failure(let err):
                     print("Diary Upload failed \(err)")
             }
+            onsuccess()
         }
     }
     
