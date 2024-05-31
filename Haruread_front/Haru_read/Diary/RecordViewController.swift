@@ -1,11 +1,14 @@
 import UIKit
 import AVFoundation
+import Gifu
 
 class RecordViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     
     var audioRecorder: AVAudioRecorder!
     var audioFile: URL!
     var progressTimer: Timer?
+    @IBOutlet weak var loadingView: GIFImageView!
+    
     
     let timeRecordSelector: Selector = #selector(RecordViewController.updateRecordTime)
     @IBOutlet var RecordBtn: UIButton! // 녹음 시작 버튼
@@ -33,8 +36,20 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPl
     @IBAction func SubmitTap(_ sender: Any) {
         //음성 파일 전송
         User.instance.send_diary(emotion: EmotionViewController.selectedEmotion!, wav_file: audioFile)
+        // 검정색 반투명 뷰 생성
+        let overlayView = UIView(frame: self.view.bounds)
+        overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.75)
+        overlayView.tag = 100  // 나중에 제거하기 쉽게 태그를 설정
+            
+        // 현재 뷰에 추가
+        self.view.addSubview(overlayView)
+        loadingView.animate(withGIFNamed: "loadingfile")
+        loadingView.center = self.view.center  // 화면 중앙에 위치시킴
+        loadingView.contentMode = .scaleAspectFit  // 이미지 비율을 맞추기 위해 설정
+        self.view.addSubview(loadingView)
+
         
-        
+        /*
         let LoginViewController = mystoryboard.instantiateViewController(withIdentifier: "SubmitViewController")
         // 모달 전환 스타일 설정
         LoginViewController.modalTransitionStyle = .crossDissolve
@@ -42,6 +57,7 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPl
         
         // 모달 방식으로 뷰 컨트롤러를 표시
         self.present(LoginViewController, animated: true, completion: nil)
+         */
     }
     
     

@@ -681,6 +681,10 @@
                                 <rect key="frame" x="75" y="153" width="243" height="4"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </progressView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="diq-yW-xf0" customClass="GIFImageView" customModule="Gifu">
+                                <rect key="frame" x="81" y="331" width="217" height="190"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4lQ-UY-1gB"/>
                         <color key="backgroundColor" red="0.99607843159999998" green="0.98431372640000003" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -690,6 +694,7 @@
                         <outlet property="RecordBtn" destination="Dnr-w8-80j" id="RV7-iN-ZYK"/>
                         <outlet property="RecordTimeLB" destination="M7R-Rj-AlN" id="pcj-gs-QgU"/>
                         <outlet property="WaveformView" destination="sSX-mi-H1U" id="djT-8L-FN2"/>
+                        <outlet property="loadingView" destination="diq-yW-xf0" id="n3f-FL-f4q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="15c-S9-Yw7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
