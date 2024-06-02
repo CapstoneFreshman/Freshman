@@ -60,6 +60,7 @@ class User
     
     struct DateResponse: Decodable{
         let emo: String
+        let short_text: String
         let feedback_text: String
         let original: String
         let feedback: String
