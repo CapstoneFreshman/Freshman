@@ -17,7 +17,7 @@ class DIARY(models.Model):
     def GET_ORI_FILE_DIR(self):
         return self.ORI_FILE_DIR
 
-class DIARY_DETAIl(models.Model):
+class DIARY_DETAIL(models.Model):
     ID = models.IntegerField(primary_key=True)
     SHORT_TEXT = models.TextField()
     FEEDBACK_TEXT = models.TextField()

@@ -10,6 +10,7 @@ target 'Haru_read' do
   pod 'AudioKit'
   pod 'Alamofire'
   pod 'FSCalendar'
+  pod 'Gifu'
 
   target 'Haru_readTests' do
     inherit! :search_paths

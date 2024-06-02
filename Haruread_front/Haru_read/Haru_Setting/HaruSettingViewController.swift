@@ -1,10 +1,3 @@
-//
-//  HaruSettingViewController.swift
-//  Haru_read
-//
-//  Created by 전서현 on 5/6/24.
-//
-
 import UIKit
 
 class HaruSettingViewController: UIViewController {
@@ -55,13 +48,15 @@ class HaruSettingViewController: UIViewController {
 
     // 섹션 생성 함수
     private func createSection(title: String, options: [String], yOffset: CGFloat) -> UIView {
-        let sectionView = UIView(frame: CGRect(x: 0, y: yOffset, width: view.frame.width, height: 50 + CGFloat(options.count/2) * 35))
+        let rows = (options.count + 1) / 2  // 옵션 수에 따른 필요 행 수 계산
+        let sectionHeight = 25 + CGFloat(rows) * 45 // 각 버튼의 높이 및 간격을 고려한 섹션 높이 계산
+        let sectionView = UIView(frame: CGRect(x: 0, y: yOffset, width: view.frame.width, height: sectionHeight))
         sectionView.autoresizingMask = [.flexibleWidth]
 
         let titleLabel = UILabel()
         titleLabel.text = title
         titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        titleLabel.textColor = UIColor(red: 119/255, green: 78/255, blue: 61/255, alpha: 1)  // 텍스트 색상 변경
+        titleLabel.textColor = UIColor(red: 119/255, green: 78/255, blue: 61/255, alpha: 1)
         titleLabel.frame = CGRect(x: 20, y: 5, width: view.frame.width - 40, height: 20)
         sectionView.addSubview(titleLabel)
 
@@ -72,7 +67,7 @@ class HaruSettingViewController: UIViewController {
         for (index, option) in options.enumerated() {
             let button = UIButton(type: .system)
             button.setTitle(option, for: .normal)
-            button.setTitleColor(UIColor(red: 119/255, green: 78/255, blue: 61/255, alpha: 1), for: .normal)  // 버튼 텍스트 색상 변경
+            button.setTitleColor(UIColor(red: 119/255, green: 78/255, blue: 61/255, alpha: 1), for: .normal)
             button.layer.borderWidth = 1
             button.layer.borderColor = UIColor.gray.cgColor
             button.layer.cornerRadius = 5
@@ -90,6 +85,7 @@ class HaruSettingViewController: UIViewController {
 
         return sectionView
     }
+
 
     // 버튼을 눌렀을 때 동작하는 함수
     @objc func buttonTapped(_ sender: UIButton) {
@@ -126,14 +122,22 @@ class HaruSettingViewController: UIViewController {
     // "변경 완료" 버튼을 눌렀을 때의 동작
     @objc private func completeButtonTapped() {
         
-        // Storyboard와 ViewController의 Identifier 확인 필요
-        let mystoryboard = UIStoryboard(name: "Main", bundle: nil)
- 
-        if let tabBarController = mystoryboard.instantiateViewController(withIdentifier: "TabViewController") as? TabViewController {
-            tabBarController.selectedIndex = 2
-            tabBarController.modalPresentationStyle = .fullScreen
-            self.present(tabBarController, animated: true, completion: nil)
+        User.instance.change_haru_setting(old: selectedAgeGroup, style: selectedSpeakingStyle, gender: selectedGender)
+        {
+            User.instance.get_profile(){
+                // Storyboard와 ViewController의 Identifier 확인 필요
+                let mystoryboard = UIStoryboard(name: "Main", bundle: nil)
+                
+                if let tabBarController = mystoryboard.instantiateViewController(withIdentifier: "TabViewController") as? TabViewController {
+                    tabBarController.selectedIndex = 2
+                    tabBarController.modalPresentationStyle = .fullScreen
+                    self.present(tabBarController, animated: true, completion: nil)
+                }
+            }onfailure: {
+                print("HaruSettingViewController.completeButtonTapped > User.change_haru_setting > User.get_profile failed")
+            }
+        }onfailure: {
+            print("Setting change failed")
         }
     }
-
 }

@@ -9,8 +9,10 @@ class DiaryCheckViewController: UIViewController {
         Label_title()
         setupViews()
         setupConstraints()
+        background.layer.cornerRadius=10
     }
     
+    @IBOutlet weak var background: UILabel!
     // 기능 구현
     var audioPlayer: AVAudioPlayer?
 
@@ -33,15 +35,16 @@ class DiaryCheckViewController: UIViewController {
     @IBOutlet weak var homeBtn: UIImageView!
     
     func Label_title() {
-           let label = UILabel()
-           let screenWidth = UIScreen.main.bounds.width
-           let labelWidth: CGFloat = 200
-           let labelHeight: CGFloat = 100
-           label.frame = CGRect(x: (screenWidth - labelWidth) / 2, y: 30, width: labelWidth, height: labelHeight) // 중앙 정렬
-           label.text = "하루읽기"
-           label.textAlignment = .center  // 텍스트를 중앙 정렬
-           label.font = UIFont(name: "HakgyoansimWoojuR", size: 37)
-           label.textColor = UIColor(red: 119/255, green: 78/255, blue: 61/255, alpha: 1.0)  // 색상 코드 설정
+        let label = UILabel()
+        let screenWidth = UIScreen.main.bounds.width
+        let labelWidth: CGFloat = 200
+        let labelHeight: CGFloat = 100
+        label.frame = CGRect(x: (screenWidth - labelWidth) / 2, y: 0, width: labelWidth, height: labelHeight) // 중앙 정렬
+        label.text = "하루읽기"
+        label.textAlignment = .center  // 텍스트를 중앙 정렬
+        label.font = UIFont(name: "HakgyoansimWoojuR", size: 37)
+        label.textColor = UIColor.white
+           //label.textColor = UIColor(red: 119/255, green: 78/255, blue: 61/255, alpha: 1.0)  // 색상 코드 설정
            self.view.addSubview(label)
        }
 
@@ -94,20 +97,45 @@ class DiaryCheckViewController: UIViewController {
 
 
     @objc func playAudio(_ sender: UIButton) {
-        guard let url = Bundle.main.url(forResource: "Alarm01", withExtension: "wav") else {
-                    print("Error: Audio file not found")
-                    return
-                }
-                do {
-                    audioPlayer = try AVAudioPlayer(contentsOf: url)
-                    audioPlayer?.play()
-                } catch let error {
-                    print("Error playing audio: \(error.localizedDescription)")
-                }
+        var player: AVAudioPlayer? = nil
+        switch(sender.self.accessibilityLabel){
+        case "feedback_audio":
+            player = User.instance.feedbackAudioPlayer
+        case "diary_audio":
+            player = User.instance.originalAudioPlayer
+        default:
+            player = nil
+        }
+        
+        print("play")
+        debugPrint(sender.self.accessibilityLabel)
+        
+        if player == nil{
+            return
+        }
+        
+        player?.play()
     }
 
     @objc func pauseAudio(_ sender: UIButton) {
-        audioPlayer?.pause()
+        var player: AVAudioPlayer? = nil
+        switch(sender.self.accessibilityLabel){
+        case "feedback_audio":
+            player = User.instance.feedbackAudioPlayer
+        case "diary_audio":
+            player = User.instance.originalAudioPlayer
+        default:
+            player = nil
+        }
+        
+        print("stop")
+        debugPrint(sender.self.accessibilityLabel)
+        
+        if player == nil{
+            return
+        }
+        
+        player?.stop()
     }
 
     func setupConstraints() {
@@ -134,4 +162,3 @@ extension UIColor {
         self.init(red: r, green: g, blue: b, alpha: 1.0)
     }
 }
-

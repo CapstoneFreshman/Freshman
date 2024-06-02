@@ -16,7 +16,7 @@ class EmotionViewController: UIViewController {
     @IBOutlet weak var angryLb: UILabel!
     @IBOutlet weak var noemotionLb: UILabel!
  
-    var selectedEmotion: String?  // 선택된 감정을 저장할 변수
+    static var selectedEmotion: String?  // 선택된 감정을 저장할 변수
     
     @IBOutlet weak var DateLabel: UILabel!
     
@@ -76,23 +76,23 @@ class EmotionViewController: UIViewController {
         case happyBtn:
             happyLb.alpha = 1.0
             happyBtn.alpha = 1.0
-            selectedEmotion = "기쁨"
+            EmotionViewController.selectedEmotion = "기쁨"
         case sadBtn:
             sadLb.alpha = 1.0
             sadBtn.alpha = 1.0
-            selectedEmotion = "슬픔"
+            EmotionViewController.selectedEmotion = "슬픔"
         case angryBtn:
             angryLb.alpha = 1.0
             angryBtn.alpha = 1.0
-            selectedEmotion = "분노"
+            EmotionViewController.selectedEmotion = "분노"
         case noemotionBtn:
             noemotionLb.alpha = 1.0
             noemotionBtn.alpha = 1.0
-            selectedEmotion = "무감정"
+            EmotionViewController.selectedEmotion = "무감정"
         default:
             break
         }
-        print("선택된 감정: \(selectedEmotion ?? "없음")")
+        print("선택된 감정: \(EmotionViewController.selectedEmotion ?? "없음")")
     }
 
     func resetLabelsOpacity() {
@@ -109,14 +109,16 @@ class EmotionViewController: UIViewController {
     
     let mystoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
     @IBAction func selectButton(_ sender: Any) {
-        let recordViewController = mystoryboard.instantiateViewController(withIdentifier: "RecordViewController")
-        // 모달 전환 스타일 설정
-        recordViewController.modalTransitionStyle = .crossDissolve
-        recordViewController.modalPresentationStyle = .overFullScreen
-        
-        // 모달 방식으로 뷰 컨트롤러를 표시
-        self.present(recordViewController, animated: true, completion: nil)
-        
+        if EmotionViewController.selectedEmotion != nil{
+            let recordViewController = mystoryboard.instantiateViewController(withIdentifier: "RecordViewController")
+            // 모달 전환 스타일 설정
+            recordViewController.modalTransitionStyle = .crossDissolve
+            recordViewController.modalPresentationStyle = .overFullScreen
+            
+            // 모달 방식으로 뷰 컨트롤러를 표시
+            self.present(recordViewController, animated: true, completion: nil)
+            
+            }
         }
     func setCurrentDateTime() {
         let dateFormatter = DateFormatter()
