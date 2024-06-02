@@ -10,6 +10,7 @@ class DiaryCheckViewController: UIViewController {
         setupViews()
         setupConstraints()
         background.layer.cornerRadius=10
+        summaryLabel.text = User.instance.loaded_diary?.short_text
     }
     
     @IBOutlet weak var background: UILabel!
@@ -119,6 +120,11 @@ class DiaryCheckViewController: UIViewController {
         if player == nil {
             return
         }
+        
+        if audioPlayer != nil && audioPlayer?.isPlaying == true{
+            audioPlayer?.stop()
+        }
+        
 
         audioPlayer = player  // 현재 재생 중인 플레이어 설정
         player?.play()
