@@ -354,7 +354,7 @@ class User
                 multipartFormData.append(emo, withName: "EMO")
             }
             
-            multipartFormData.append(wav_file, withName: "wav_file", fileName: "recordFile.wav", mimeType: "audio/wav")
+            multipartFormData.append(wav_file, withName: "wav_file", fileName: "wav_file", mimeType: "audio/wav")
         }, to: User.host+"haru/post/")
         .response{ response in
             switch response.result{
