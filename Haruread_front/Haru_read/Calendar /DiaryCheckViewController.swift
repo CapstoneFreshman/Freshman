@@ -36,7 +36,8 @@ class DiaryCheckViewController: UIViewController {
     let diaryCurrentTimeLabel = UILabel()
     let diaryDurationLabel = UILabel()
     
-    @IBOutlet weak var summaryText: UILabel!
+    
+    @IBOutlet weak var summaryLabel: UILabel! // 요약 텍스트
     @IBOutlet weak var homeBtn: UIImageView!
     
     func Label_title() {
