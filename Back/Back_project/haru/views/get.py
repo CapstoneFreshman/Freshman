@@ -64,6 +64,7 @@ def get_date(request, year, month, day):
         if diary == None and detail == None: #for test
             res = {
                 "emo": "테스트 감정",
+                'short_text': "Test short text",
                 'feedback_text': "테스트 피드백 텍스트",
                 'original': f"haru/voice/{date.year}/{date.month}/{date.day}/original/",
                 'feedback': f"haru/voice/{date.year}/{date.month}/{date.day}/feedback/"
@@ -72,6 +73,7 @@ def get_date(request, year, month, day):
         else:
             res = {
                 "emo": diary.EMO,
+                'short_text': detail.SHORT_TEXT,
                 'feedback_text': detail.FEEDBACK_TEXT,
                 'original': f"haru/voice/{date.year}/{date.month}/{date.day}/original/",
                 'feedback': f"haru/voice/{date.year}/{date.month}/{date.day}/feedback/"
@@ -85,8 +87,10 @@ def get_date(request, year, month, day):
 
 
 def get_diary(request, user_id, date):
-    diary_query = DIARY.objects.filter(USER_ID=user_id, DATE=date)
-    if diary_query.count() != 1:
+    user = User.objects.get(id=user_id)
+    print(date)
+    diary_query = DIARY.objects.filter(USER_ID=user, DATE__year=date.year, DATE__month=date.month, DATE__day=date.day)
+    if diary_query.count() == 0:
         return None, None, HttpResponse(f"Diary on {date} not found", status=404)
 
     diary = diary_query.first()
@@ -94,6 +98,7 @@ def get_diary(request, user_id, date):
     detail_query = DIARY_DETAIL.objects.filter(ID=diary.id)
 
     if detail_query.count() != 1:
+        print(f"Internal Error: found {detail_query.count()} DIARY_DETAIL for DIARY({date})")
         return None, None, HttpResponse(f"Internal Error: found {detail_query.count()} DIARY_DETAIL for DIARY({date})", status=500)
 
     detail = detail_query.first()
@@ -109,6 +114,10 @@ def get_voice_file(request, year, month, day, type):
     date = datetime(year, month, day)
 
     diary, detail, response = get_diary(request, request.user.id, date)
+
+    print(diary)
+    print(detail)
+    print(response)
 
     if diary == None or detail == None or diary.ORI_FILE_DIR == "Test Original Path" or detail.FEEDBACK_FILE_DIR == "Test Feedback Path":#for test
         from Back_project.settings import MEDIA_ROOT
@@ -131,11 +140,17 @@ def get_voice_file(request, year, month, day, type):
 
     try:
         bucket_name = settings.AWS_STORAGE_BUCKET_NAME
-        s3 = boto3.client('s3')
+        s3 = boto3.client(
+            's3',
+            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+            region_name=settings.AWS_S3_REGION_NAME
+            )
         voice_file = s3.get_object(Bucket=bucket_name, Key=key)
-        voice_data = voice_file.read()
+        voice_data = voice_file['Body'].read()
 
         return HttpResponse(voice_data, content_type="audio/wav")
 
     except Exception as e:
+        print(str(e))
         return HttpResponse("Error retrieving file from S3: " + str(e), status=500)

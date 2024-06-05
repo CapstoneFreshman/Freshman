@@ -23,9 +23,6 @@ def upload_wav_to_s3(request,content,path_tag):
         s3_client.upload_fileobj(wav_file, bucket_name, file_path)
 
 
-        # 업로드된 파일의 URL 생성
-        s3_file_url = f"https://{bucket_name}.s3.amazonaws.com/{file_path}"
-
-        return JsonResponse({'url': s3_file_url})
+        return JsonResponse({'url': file_path})
     else:
         return JsonResponse({'error': 'No WAV file uploaded'}, status=400)
